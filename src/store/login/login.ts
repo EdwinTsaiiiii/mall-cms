@@ -33,6 +33,7 @@ const loginModule: Module<ILoginState, IRootState> = {
     }
   },
   actions: {
+    // 加载本地登录数据，防止刷新时产生丢失
     loadLocalLogin({ commit }) {
       const token = LocalCache.getCache('token')
       if (token) {
@@ -47,6 +48,7 @@ const loginModule: Module<ILoginState, IRootState> = {
         commit('changeUserMenus', userMenus)
       }
     },
+    // 账号密码登录
     async accountLoginAction({ commit }, payload: IAccount) {
       // 1.实现登录逻辑
       const loginResult = await accountLoginRequest(payload)
@@ -68,8 +70,9 @@ const loginModule: Module<ILoginState, IRootState> = {
       // 4.跳到首页
       router.push('/main')
     },
+    // 手机号登录
     phoneLoginAction({ commit }, payload: IPhoneAccount) {
-      console.log(payload)
+      alert('暂不支持手机登录服务！')
     }
   },
   getters: {}

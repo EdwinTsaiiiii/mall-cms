@@ -28,6 +28,7 @@ export default defineComponent({
     const store = useStore()
     // 登录逻辑
     const loginAction = (isKeepPassword: boolean) => {
+      console.log(formRef)
       formRef.value?.validate((valid) => {
         if (valid) {
           // 判断是否需要记住密码
@@ -44,6 +45,8 @@ export default defineComponent({
           }
           // 进行登录验证的逻辑
           store.dispatch('login/accountLoginAction', { ...account })
+        }else{
+          alert('用户名或密码错误！')
         }
       })
     }

@@ -6,7 +6,7 @@
       </el-form-item>
       <el-form-item label="验证码" prop="auth_code">
         <el-input v-model="phoneInfo.auth_code" class="auth-code" />
-        <el-button class="auth-code-btn">获取验证码</el-button>
+        <el-button class="auth-code-btn" @click="getCode(phoneInfo.auth_code)">获取验证码</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -16,12 +16,11 @@ import { ElForm } from 'element-plus'
 import { defineComponent, ref, reactive } from 'vue'
 import { useStore } from 'vuex'
 import { rules } from '../config/account-config'
-import LocalCache from '../../../utils/cache'
 export default defineComponent({
   setup() {
     // 手机号登录信息
     const phoneInfo = reactive({
-      phone: LocalCache.getCache('phone') || '',
+      phone: '',
       auth_code: ''
     })
     // 绑定的组件对象，此处需要获取某个组件对应的类型
@@ -36,10 +35,16 @@ export default defineComponent({
         }
       })
     }
+    // 获取验证码
+    const getCode = (phone: string) => {
+      alert('暂不支持获取验证码业务')
+    }
     return {
       rules,
       phoneInfo,
-      loginAction
+      formRef,
+      loginAction,
+      getCode
     }
   }
 })
