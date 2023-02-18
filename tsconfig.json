@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // 目标代码(ts -> es5/6/7)
+    "useDefineForClassFields": true,
+    "module": "ESNext", // 目标代码需要使用的模块化方案 require/module.exports/es module import/export
+    "moduleResolution": "Node", // 按照node的模方式去解析模块
+    "strict": true, // 严格模式的检察(any)
+    "jsx": "preserve", // 是否需对jsx作处理
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true, // es module和commonjs混合使用
+    "lib": ["ESNext", "DOM"], // 可以指定在项目中可以使用哪里库的类型(Proxy/Window/Document)
+    "skipLibCheck": true, // 跳过一些库的类型检测 (axois -> 类型/lodash ->@types/lodash / 其他第三方库)
+    "noEmit": true,
+    "sourceMap": false, // 要不要生成映射文件(ts -> js)
+    "baseUrl": ".", // 文件路径在解析时, 基本url
+  },
+  // 包含哪一些文件的代码需要编译解析的
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  // 排除不用解析的文件
+  "exclude": ["node_modules"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
