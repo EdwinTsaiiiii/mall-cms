@@ -12,7 +12,15 @@ import {
   ElRadio,
   ElTabPane,
   ElTabs,
-  ElIcon
+  ElIcon,
+  ElHeader,
+  ElMain,
+  ElAside,
+  ElContainer,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItem,
+  ElMenuItemGroup,
 } from 'element-plus'
 
 const components = [
@@ -25,7 +33,15 @@ const components = [
   ElRadio,
   ElTabPane,
   ElTabs,
-  ElIcon
+  ElIcon,
+  ElHeader,
+  ElMain,
+  ElAside,
+  ElContainer,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItem,
+  ElMenuItemGroup,
 ]
 
 export default function (app: App): void {

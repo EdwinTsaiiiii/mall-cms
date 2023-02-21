@@ -9,6 +9,7 @@ import { IAccount, IPhoneAccount } from '../../service/login/types'
 import { ILoginState } from './types'
 import { IRootState } from '../types'
 import LocalCache from '../../utils/cache'
+import { mapMenusToRoutes } from '../../utils/map-menus'
 import router from '../../router'
 
 // S => state 类型, R => root类型
@@ -30,6 +31,13 @@ const loginModule: Module<ILoginState, IRootState> = {
     },
     changeUserMenus(state, userMenus: any) {
       state.userMenus = userMenus
+      // userMenus映射到routes里面
+      // 将routes 添加到
+      const routes = mapMenusToRoutes(userMenus)
+      routes.forEach((route) => {
+        // 注意要注册在main下
+        router.addRoute('main', route)
+      })
     }
   },
   actions: {
@@ -65,7 +73,9 @@ const loginModule: Module<ILoginState, IRootState> = {
       // 3.请求用户菜单
       const userMenusResult = await requestUserMenuByRoleId(userInfo.role.id)
       const userMenus = userMenusResult.data
+      console.log(userMenus)
       commit('changeUserMenus', userMenus)
+      LocalCache.setCache('userMenus', userMenus)
 
       // 4.跳到首页
       router.push('/main')
