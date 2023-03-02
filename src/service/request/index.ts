@@ -2,7 +2,7 @@ import axios from 'axios'
 import type { AxiosInstance } from 'axios'
 import type { SelfRequestInterceptors, SelfRequestConfig } from './types'
 
-import { ElLoading } from 'element-plus'
+import { ElLoading, ElMessage } from 'element-plus'
 import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading.js'
 
 const DEAFULT_LOADING = true
@@ -55,21 +55,25 @@ class SelfRequest {
         if (data.code == 0) {
           return data
         } else {
-          console.log('请求失败~, 错误信息')
+          ElMessage({
+            type: 'info',
+            message: '请求失败~, 错误信息：' + data.data
+          })
         }
       },
       (error) => {
         // console.log('所有的实例都有的拦截器: 响应失败拦截')
         this.loading?.close()
         if (error.response.status === 404) {
-          console.log('404的错误~')
+          alert('404的错误~')
         }
         return error
       }
     )
   }
 
-  request<T>(config: SelfRequestConfig<T>): Promise<T> { // 在SelfRequestConfig中加泛型，会一步一步传，传到types中的responseInterceptor
+  request<T = any>(config: SelfRequestConfig<T>): Promise<T> {
+    // 在SelfRequestConfig中加泛型，会一步一步传，传到types中的responseInterceptor
     return new Promise((resolve, reject) => {
       // 1.单个请求对请求config的处理
       if (config.interceptors?.requestInterceptor) {
@@ -99,19 +103,19 @@ class SelfRequest {
     })
   }
 
-  get<T>(config: SelfRequestConfig<T>): Promise<T> {
+  get<T = any>(config: SelfRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'GET' })
   }
 
-  post<T>(config: SelfRequestConfig<T>): Promise<T> {
+  post<T = any>(config: SelfRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'POST' })
   }
 
-  delete<T>(config: SelfRequestConfig<T>): Promise<T> {
+  delete<T = any>(config: SelfRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'DELETE' })
   }
 
-  patch<T>(config: SelfRequestConfig<T>): Promise<T> {
+  patch<T = any>(config: SelfRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'PATCH' })
   }
 }

@@ -14,6 +14,9 @@
     "noEmit": true,
     "sourceMap": false, // 要不要生成映射文件(ts -> js)
     "baseUrl": ".", // 文件路径在解析时, 基本url
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   // 包含哪一些文件的代码需要编译解析的
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

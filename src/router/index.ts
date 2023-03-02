@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import LocalCache from '../utils/cache'
-
 // 1.不同的角色注册不同的路由:
 // 登录->userinfo->role.name->动态加载数组->main.routes
 
@@ -43,6 +42,8 @@ router.beforeEach((to) => {
     const token = LocalCache.getCache('token')
     if (!token) return '/login'
   }
+  // 匹配到的name是not-found:
+  // app.use() -> install(){} -> 获取当前path -> router.routes -> not-found -> 注册动态路由routes -> 路由守卫（回调函数）
 })
 
 export default router

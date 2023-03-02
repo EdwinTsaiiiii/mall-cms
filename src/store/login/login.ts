@@ -4,13 +4,13 @@ import {
   accountLoginRequest,
   requestUserInfoById,
   requestUserMenuByRoleId
-} from '../../service/login/login'
-import { IAccount, IPhoneAccount } from '../../service/login/types'
+} from '@/service/login/login'
+import { IAccount, IPhoneAccount } from '@/service/login/types'
 import { ILoginState } from './types'
 import { IRootState } from '../types'
-import LocalCache from '../../utils/cache'
-import { mapMenusToRoutes } from '../../utils/map-menus'
-import router from '../../router'
+import LocalCache from '@/utils/cache'
+import { mapMenusToRoutes, mapMenusToPermission } from '@/utils/map-menus'
+import router from '@/router'
 
 // S => state 类型, R => root类型
 const loginModule: Module<ILoginState, IRootState> = {
@@ -19,10 +19,12 @@ const loginModule: Module<ILoginState, IRootState> = {
     return {
       token: '',
       userInfo: '',
-      userMenus: []
+      userMenus: [],
+      permissions: []
     }
   },
   mutations: {
+    // mutation最好不要有异步操作
     changeToken(state, token: string) {
       state.token = token
     },
@@ -38,14 +40,18 @@ const loginModule: Module<ILoginState, IRootState> = {
         // 注意要注册在main下
         router.addRoute('main', route)
       })
+      const permissions = mapMenusToPermission(userMenus)
+      state.permissions = permissions
     }
   },
   actions: {
     // 加载本地登录数据，防止刷新时产生丢失
-    loadLocalLogin({ commit }) {
+    loadLocalLogin({ commit, dispatch }) {
       const token = LocalCache.getCache('token')
       if (token) {
         commit('changeToken', token)
+        // 发送初始化请求（完整的角色与部门）
+        dispatch('getInitialDataAction', null, { root: true })
       }
       const userInfo = LocalCache.getCache('userInfo')
       if (userInfo) {
@@ -57,12 +63,15 @@ const loginModule: Module<ILoginState, IRootState> = {
       }
     },
     // 账号密码登录
-    async accountLoginAction({ commit }, payload: IAccount) {
+    async accountLoginAction({ commit, dispatch }, payload: IAccount) {
       // 1.实现登录逻辑
       const loginResult = await accountLoginRequest(payload)
       const { id, token } = loginResult.data
       commit('changeToken', token)
       LocalCache.setCache('token', token)
+
+      // 发送初始化请求（完整的角色与部门）
+      dispatch('getInitialDataAction', null, { root: true })
 
       // 2.请求用户信息
       const userInfoResult = await requestUserInfoById(id)

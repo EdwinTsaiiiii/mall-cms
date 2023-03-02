@@ -41,7 +41,7 @@ import { TabsPaneContext } from 'element-plus'
 import { defineComponent, ref } from 'vue'
 import LoginAccount from './login-account.vue'
 import LoginPhone from './login-phone.vue'
-import LocalCache from '../../../utils/cache'
+import LocalCache from '@/utils/cache'
 
 export default defineComponent({
   components: {

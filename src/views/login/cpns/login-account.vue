@@ -15,7 +15,7 @@ import { ElForm } from 'element-plus'
 import { defineComponent, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 import { rules } from '../config/account-config'
-import LocalCache from '../../../utils/cache'
+import LocalCache from '@/utils/cache'
 export default defineComponent({
   setup() {
     // 账号信息
