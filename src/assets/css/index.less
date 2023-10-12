@@ -1,2 +1,36 @@
 @import "./reset.less";
 @import "./common.less";
+
+:root{
+  --dot-color: #ff0000ff;
+
+  // 日间主题
+  --day-main-color: #409eff;
+  --day-main-color-hover: #ECF5FFFF;
+  --day-font-color: #303133;
+  --day-font-hover: #409eff;
+  --day-bg-color1: #ffffff;
+  --day-bg-color2: #fcfcfc;
+  --day-bg-color3: #eeeeee;
+  --switch-bg-color: #409eff;
+  --color-filter: drop-shadow(0.8px 0.8px 2px #409eff);
+  --el-menu-hover-bg-color: #ECF5FFFF !important;
+}
+
+.dark{
+  // 夜间主题
+  --day-main-color: #409eff;
+  --day-main-color-hover: #409EFF33;
+  --day-font-color: #cfd3dc;
+  --day-font-hover: #eeeeee;
+  --day-bg-color1: #1e1e1e;
+  --day-bg-color2: #232323;
+  --day-bg-color3: #505050;
+  --switch-bg-color: #1e1e1e;
+  --color-filter: drop-shadow(2px 2px 6px #409eff);
+  --el-menu-hover-bg-color: #ECF5FFFF !important;
+}
+
+.transition{
+  transition: border-color var(--el-transition-duration),background-color var(--el-transition-duration),color var(--el-transition-duration);
+}

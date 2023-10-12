@@ -27,11 +27,11 @@ class MyRequest {
     // 每个instance实例都添加请求拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        console.log("全局请求成功的拦截");
+        // console.log("全局请求成功的拦截");
         return config;
       },
       (error) => {
-        console.log("全局请求失败的拦截");
+        // console.log("全局请求失败的拦截");
         return error;
       }
     );
@@ -39,11 +39,11 @@ class MyRequest {
     // 每个instance实例都添加响应拦截器
     this.instance.interceptors.response.use(
       (res) => {
-        console.log("全局响应成功的拦截");
+        // console.log("全局响应成功的拦截");
         return res.data;
       },
       (error) => {
-        console.log("全局响应失败的拦截");
+        // console.log("全局响应失败的拦截");
         return error;
       }
     );
