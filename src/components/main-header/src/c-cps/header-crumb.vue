@@ -15,7 +15,9 @@ const breadcrumb = computed(() => {
 <template>
   <el-breadcrumb separator="/">
     <template v-for="item in breadcrumb" :key="item.name">
-      <el-breadcrumb-item :to="item.path">{{ item.name }}</el-breadcrumb-item>
+      <el-breadcrumb-item :to="item.path">
+        {{ item.name }}
+      </el-breadcrumb-item>
     </template>
   </el-breadcrumb>
 </template>

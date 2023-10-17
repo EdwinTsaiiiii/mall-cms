@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from "vue-router";
-import type { IBreadCrumbs } from "@/types/main";
+import type { IBreadCrumbs } from "@/types/main/main";
 
 export let firstRoute: RouteRecordRaw | undefined = undefined;
 

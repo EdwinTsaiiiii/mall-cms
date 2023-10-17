@@ -1,5 +1,5 @@
 import MyRequest from "../";
-import type { IAccount } from "@/types/login";
+import type { IAccount } from "@/types/login/login";
 
 /**
  * 用户账号密码登录

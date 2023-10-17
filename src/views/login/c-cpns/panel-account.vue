@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import type { FormRules, FormInstance } from "element-plus";
-import type { IAccount } from "@/types/login";
+import type { IAccount } from "@/types/login/login";
 import { ElMessage } from "element-plus";
 import useLoginStore from "@/store/login/login";
 import { localCache } from "@/utils/cache";

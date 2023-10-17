@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { localCache } from "@/utils/cache";
 import {
+  IS_DAY,
   LOGIN_NAME,
   LOGIN_PASSWORD,
   LOGIN_TOKEN,
@@ -12,23 +13,34 @@ import {
 import { useRouter } from "vue-router";
 import useLoginStore from "@/store/login/login";
 import { Sunny, Moon } from "@element-plus/icons-vue";
+import useMainStore from "@/store/main/main";
 
 const loginStore = useLoginStore();
 const userInfo = loginStore.userInfo;
 
 // 切换日间夜间主题
-const isDay = ref(true);
-watch(isDay, () => {
-  if (isDay.value === false) {
-    // 夜间模式添加类名
-    document.body.classList.add("dark");
-  } else {
+const isDay = ref(localCache.getCache(IS_DAY) ?? true);
+if (isDay.value) document.body.classList.remove("dark");
+const handleChangeTheme = () => {
+  if (isDay.value) {
     // 日间模式删除类名
+    localCache.setCache(IS_DAY, isDay.value);
     document.body.classList.remove("dark");
+  } else {
+    // 夜间模式添加类名
+    localCache.setCache(IS_DAY, isDay.value);
+    document.body.classList.add("dark");
   }
-});
+};
 
 // 中英互换：待开发
+const mainStore = useMainStore();
+const lan = computed(() => {
+  return mainStore.language ? 1 : 0;
+});
+const handleChangeLanguage = () => {
+  mainStore.switchLanguage();
+};
 
 // 退出登录操作
 const router = useRouter();
@@ -52,19 +64,21 @@ const handleLogoutClick = () => {
       <span class="switch-day-night">
         <el-switch
           v-model="isDay"
+          @change="handleChangeTheme"
           class="mt-2"
           inline-prompt
           :active-icon="Sunny"
           :inactive-icon="Moon"
         />
       </span>
-      <span>
+      <span @click="handleChangeLanguage">
         <svg
           preserveAspectRatio="xMidYMid meet"
           viewBox="0 0 24 24"
           width="1.25em"
           height="1.25em"
           data-v-12008bb2=""
+          :color="lan ? 'var(--el-color-primary)' : ''"
         >
           <path
             fill="currentColor"

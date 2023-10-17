@@ -33,10 +33,7 @@ const handleIconMenusClick = () => {
 <style scoped lang="less">
 :global(.el-header) {
   background-color: var(--day-bg-color1);
-  transition:
-    border-color var(--el-transition-duration),
-    background-color var(--el-transition-duration),
-    color var(--el-transition-duration);
+  transition: var(--day-night-transition);
 }
 
 .main-header {

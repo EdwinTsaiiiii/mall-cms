@@ -2,35 +2,58 @@
 @import "./common.less";
 
 :root{
-  --dot-color: #ff0000ff;
+  --dot-color: var(--jjext-color-tips);
+  --el-color-danger: #f56c6c;
+  --el-color-danger-light-9: #fef0f0;
+  --el-color-success-light-9: #f0f9eb;
 
   // 日间主题
+  --el-color-primary:#409eff;
   --day-main-color: #409eff;
   --day-main-color-hover: #ECF5FFFF;
+  --el-fill-color-light: #ECF5FFFF;
   --day-font-color: #303133;
   --day-font-hover: #409eff;
   --day-bg-color1: #ffffff;
-  --day-bg-color2: #fcfcfc;
+  --day-bg-color2: #fafafa;
   --day-bg-color3: #eeeeee;
   --switch-bg-color: #409eff;
   --color-filter: drop-shadow(0.8px 0.8px 2px #409eff);
   --el-menu-hover-bg-color: #ECF5FFFF !important;
+  --el-fill-color-blank:#ffffff;
+  --el-text-color-regular: #303133;
+  --el-text-color-primary: #303133;
+  --el-border-color: #dcdfe6;
+  --el-border-color-lighter: #dcdfe6;
+  --el-color-primary-light-9: #ecf5ff;
+  --day-night-transition:
+      border-color var(--el-transition-duration),
+      background-color var(--el-transition-duration),
+      color var(--el-transition-duration);
 }
 
 .dark{
+  --el-color-danger: #f85959;
+  --el-color-danger-light-9: rgba(120, 10, 10, 0.5);
+  --el-color-success-light-9: rgba(10, 60, 10, 0.5);
+
   // 夜间主题
+  --el-color-primary: #1352a3;
   --day-main-color: #409eff;
   --day-main-color-hover: #409EFF33;
+  --el-fill-color-light: #409EFF33;
   --day-font-color: #cfd3dc;
   --day-font-hover: #eeeeee;
   --day-bg-color1: #1e1e1e;
-  --day-bg-color2: #232323;
+  --day-bg-color2: #2c2c2c;
   --day-bg-color3: #505050;
   --switch-bg-color: #1e1e1e;
   --color-filter: drop-shadow(2px 2px 6px #409eff);
   --el-menu-hover-bg-color: #ECF5FFFF !important;
-}
-
-.transition{
-  transition: border-color var(--el-transition-duration),background-color var(--el-transition-duration),color var(--el-transition-duration);
+  --el-fill-color-blank:#1e1e1e;
+  --el-text-color-regular: #cfd3dc;
+  --el-text-color-primary: #cfd3dc;
+  --el-border-color: #696969;
+  --el-border-color-lighter: #696969;
+  --el-color-primary-light-9: #409EFF33;
 }

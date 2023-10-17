@@ -4,14 +4,15 @@ import {
   getUserInfoById,
   getUserMenusByRoleId
 } from "@/service/login/login";
-import type { IAccount } from "@/types/login";
+import type { IAccount } from "@/types/login/login";
 import { localCache } from "@/utils/cache";
 import { LOGIN_TOKEN, USER_INFO, USER_MENUS } from "@/global/constant";
 import router from "@/router";
-import type { ILoginState } from "@/types/login";
+import type { ILoginState } from "@/types/login/login";
 // @ts-ignore
 import { ElMessage } from "element-plus";
 import { addRoutesWithMenu } from "@/router";
+import useMainStore from "@/store/main/main";
 
 const useLoginStore = defineStore("login", {
   state: (): ILoginState => ({
@@ -52,6 +53,8 @@ const useLoginStore = defineStore("login", {
 
       // 6.进行页面跳转
       router.push("/main");
+
+      ElMessage.success("登录成功");
     },
 
     // 加载所有数据
@@ -60,6 +63,11 @@ const useLoginStore = defineStore("login", {
       this.userInfo = localCache.getCache(USER_INFO);
       this.userMenus = localCache.getCache(USER_MENUS);
 
+      // 加载role和department
+      const mainStore = useMainStore();
+      mainStore.fetchEntireData();
+
+      // 加载动态路由
       addRoutesWithMenu(this.userMenus);
     }
   }

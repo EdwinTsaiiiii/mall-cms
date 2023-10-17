@@ -56,10 +56,7 @@ const handleFoldChange = (flag: boolean) => {
       width: 100%;
       height: 100%;
       background-color: var(--day-bg-color1);
-      transition:
-        border-color var(--el-transition-duration),
-        background-color var(--el-transition-duration),
-        color var(--el-transition-duration);
+      transition: var(--day-night-transition);
     }
 
     &::-webkit-scrollbar {
@@ -69,10 +66,7 @@ const handleFoldChange = (flag: boolean) => {
 
   .el-main {
     background-color: var(--day-bg-color2);
-    transition:
-      border-color var(--el-transition-duration),
-      background-color var(--el-transition-duration),
-      color var(--el-transition-duration);
+    transition: var(--day-night-transition);
   }
 }
 </style>
