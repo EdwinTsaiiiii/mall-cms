@@ -6,7 +6,7 @@ function usePageContent() {
   const contentRef = ref<InstanceType<typeof PageContent>>();
   const handleQueryClick = (searchInfo: any) => {
     // @ts-ignore
-    contentRef.value?.fetchUserListData(searchInfo);
+    contentRef.value?.fetchListData(searchInfo);
   };
   const handleResetClick = () => {
     // @ts-ignore

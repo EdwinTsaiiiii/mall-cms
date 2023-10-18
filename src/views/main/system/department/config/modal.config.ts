@@ -22,18 +22,18 @@ const modalConfig: IForm = {
     {
       label: ["部门名称", "department name"],
       prop: "name",
-      type: "input",
+      field: "input",
       placeholder: ["请输入部门名称", "please input department name"]
     },
     {
       label: ["部门领导", "department leader"],
       prop: "leader",
-      type: "input",
+      field: "input",
       placeholder: ["请输入部门领导", "please input department leader"]
     },
     {
       prop: "departmentId",
-      type: "select",
+      field: "select",
       label: ["上级部门", "superior department"],
       placeholder: ["请选择上级部门", "please select superior department"],
       options: [{ id: "111", name: "无" }]

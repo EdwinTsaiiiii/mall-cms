@@ -1,7 +1,7 @@
 import type { IForm } from "@/base-ui/form";
 
 const searchConfig: IForm = {
-  pageName: "department",
+  pageName: "role",
   header: [],
   style: {
     labelWidth: "120px",
@@ -19,22 +19,22 @@ const searchConfig: IForm = {
   },
   formItems: [
     {
-      label: ["部门名称", "department name"],
+      label: ["角色名称", "role name"],
       prop: "name",
       field: "input",
-      placeholder: ["请输入部门名称", "please input department name"]
+      placeholder: ["请输入角色名称", "please input role name"]
     },
     {
-      label: ["部门领导", "department leader"],
-      prop: "leader",
+      label: ["角色权限", "role admission"],
+      prop: "intro",
       field: "input",
-      placeholder: ["请输入部门领导", "please input department leader"]
+      placeholder: ["请输入角色权限", "please input role admission"]
     },
     {
-      label: ["创建时间", "create time"],
       prop: "createAt",
       field: "datepicker",
-      placeholder: ["请选择创建时间范围", "please select created time"],
+      label: ["创建时间", "created time"],
+      placeholder: ["请选择时间", "please select time"],
       otherOptions: {
         startPlaceholder: ["开始时间", "begin"],
         endPlaceholder: ["结束时间", "end"],

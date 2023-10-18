@@ -6,5 +6,6 @@ export interface IBreadCrumbs {
 export interface IMainState {
   entireRoles: any[];
   entireDepartments: any[];
+  entireMenus: any[];
   language: boolean;
 }

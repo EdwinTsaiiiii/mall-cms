@@ -12,6 +12,7 @@ defineProps<{
   listData: any;
   listCount: number;
   page: any;
+  childrenProps?: any;
 }>();
 
 // 语言
@@ -22,24 +23,14 @@ const lan = computed(() => {
 
 const normalColumn = ["selection", "index", "normal"];
 
-const emit = defineEmits(["fetchUserListData"]);
+const emit = defineEmits(["fetchListData"]);
 
 // 分页的事件
 const handleCurrentChange = () => {
-  emit("fetchUserListData");
+  emit("fetchListData");
 };
 const handleSizeChange = () => {
-  emit("fetchUserListData");
-};
-
-// 将父部门的id映射到对应的名称上
-const mapDepartmentId = (parentId: number) => {
-  for (const item of mainStore.entireDepartments) {
-    if (parentId == item.id) {
-      return item.name;
-    }
-  }
-  return "";
+  emit("fetchListData");
 };
 </script>
 
@@ -55,12 +46,17 @@ const mapDepartmentId = (parentId: number) => {
   </div>
   <!-- 表格 -->
   <div class="table">
-    <el-table :data="listData" :border="true" style="width: 100%">
+    <el-table
+      :data="listData"
+      :border="true"
+      style="width: 100%"
+      v-bind="childrenProps"
+    >
       <template v-for="item in tableItems || []" :key="item.prop">
-        <template v-if="normalColumn.includes(item.type)">
+        <template v-if="normalColumn.includes(item.field)">
           <el-table-column
             align="center"
-            :type="item.type"
+            :type="item.field"
             :prop="item.prop"
             :label="item.label[lan]"
             :width="item.width"
@@ -68,7 +64,7 @@ const mapDepartmentId = (parentId: number) => {
         </template>
         <template v-else>
           <el-table-column
-            :type="item.type"
+            :type="item.field"
             :prop="item.prop"
             :label="item.label[lan]"
             :width="item.width"

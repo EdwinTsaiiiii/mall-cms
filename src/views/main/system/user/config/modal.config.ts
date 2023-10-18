@@ -20,39 +20,39 @@ const modalConfig: IForm = {
   formItems: [
     {
       prop: "name",
-      type: "input",
+      field: "input",
       label: ["用户名", "username"],
       placeholder: ["请输入用户名", "please input your username"]
     },
     {
       prop: "realname",
-      type: "input",
+      field: "input",
       label: ["真实姓名", "realname"],
       placeholder: ["请输入真实姓名", "please input your real name"]
     },
     {
       prop: "password",
-      type: "password",
+      field: "password",
       label: ["用户密码", "user password"],
       placeholder: ["请输入密码", "please input your password"],
       isHidden: false
     },
     {
       prop: "cellphone",
-      type: "input",
+      field: "input",
       label: ["手机号码", "cellphone"],
       placeholder: ["请输入手机号码", "please input your cellphone"]
     },
     {
       prop: "departmentId",
-      type: "select",
+      field: "select",
       label: ["选择部门", "select department"],
       placeholder: ["请选择部门", "please select your department"],
       options: [{ id: "111", name: "无" }]
     },
     {
       prop: "roleId",
-      type: "select",
+      field: "select",
       label: ["选择角色", "select role"],
       placeholder: ["请选择角色", "please select your role"],
       options: [{ id: "111", name: "无" }]

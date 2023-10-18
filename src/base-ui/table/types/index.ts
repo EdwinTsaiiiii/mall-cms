@@ -1,5 +1,5 @@
 export interface ITableItems {
-  type: string;
+  field: string;
   prop: string;
   label: string[];
   width: number;
@@ -10,4 +10,5 @@ export interface ITable {
   tableItems: ITableItems[];
   header: any;
   handle?: any;
+  childrenProps?: any;
 }

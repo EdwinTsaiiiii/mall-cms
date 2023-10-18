@@ -14,6 +14,8 @@ import usePageModal from "@/hooks/usePageModal";
 import useMapOptions from "@/hooks/useMapOptions";
 
 // 计算属性，将初始化option传入配置
+// 注意这里需要考虑异步的问题，请求还未完成响应，下面的代码已经执行了
+// 采用computed的方式解决，配置一发生改变，则立即执行computed中的回调函数
 const mapOptions = useMapOptions(modalConfig);
 const modalConfigRef = computed(() => {
   return mapOptions.handleModalConfig();
@@ -33,7 +35,6 @@ const { modalRef, handleNewDataClick, handleEditDataClick } = usePageModal();
     @query-click="handleQueryClick"
     @reset-click="handleResetClick"
   />
-
   <!-- 2.展示区域 -->
   <pageContent
     :content-config="contentConfig"
@@ -50,7 +51,6 @@ const { modalRef, handleNewDataClick, handleEditDataClick } = usePageModal();
       </el-tag>
     </template>
   </pageContent>
-
   <!-- 3.新建和编辑 -->
   <page-modal ref="modalRef" :modal-config-ref="modalConfigRef" />
 </template>

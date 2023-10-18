@@ -86,3 +86,22 @@ export function mapPathToBreadCrumbs(
   }
   return breadcrumbs;
 }
+
+/**
+ * 映射菜单到id
+ * @param menus 菜单
+ */
+export function mapMenuToIds(menus: any[]) {
+  const ids: number[] = [];
+  // 递归对树结构进行平坦化
+  function _recurseGetId(menuList: any[]) {
+    for (const menu of menuList) {
+      if (menu.children) {
+        _recurseGetId(menu.children);
+      }
+      ids.push(menu.id);
+    }
+  }
+  _recurseGetId(menus);
+  return ids;
+}

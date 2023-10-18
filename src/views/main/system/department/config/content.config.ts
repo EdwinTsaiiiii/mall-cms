@@ -14,43 +14,48 @@ const contentConfig: ITable = {
     title: ["您确定要删除吗?", "Are you sure to delete?"]
   },
   tableItems: [
-    { type: "selection", prop: "select", label: ["选择", "select"], width: 80 },
-    { type: "index", prop: "index", label: ["序号", "No"], width: 80 },
     {
-      type: "normal",
+      field: "selection",
+      prop: "select",
+      label: ["选择", "select"],
+      width: 80
+    },
+    { field: "index", prop: "index", label: ["序号", "No"], width: 80 },
+    {
+      field: "normal",
       prop: "name",
       label: ["部门名称", "department name"],
       width: 240
     },
     {
-      type: "normal",
+      field: "normal",
       prop: "leader",
       label: ["部门领导", "department leader"],
       width: 240
     },
     {
-      type: "parent",
+      field: "parent",
       prop: "parentId",
       label: ["上级部门", "superior department"],
       width: 240,
       slotName: "parentId"
     },
     {
-      type: "time",
+      field: "time",
       prop: "createAt",
       label: ["创建时间", "creative time"],
       width: 240,
       slotName: "createAt"
     },
     {
-      type: "time",
+      field: "time",
       prop: "updateAt",
       label: ["更新时间", "update time"],
       width: 240,
       slotName: "updateAt"
     },
     {
-      type: "handler",
+      field: "handler",
       prop: "",
       label: ["操作", "operation"],
       width: 253,

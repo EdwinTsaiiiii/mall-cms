@@ -1,8 +1,8 @@
-type IFormType = "input" | "password" | "select" | "datepicker";
+type IFormType = "input" | "password" | "select" | "datepicker" | "custom";
 
 export interface IFormItem {
   prop: string;
-  type: IFormType;
+  field: IFormType;
   label: string[];
   rules?: any[];
   placeholder?: any;
@@ -11,6 +11,7 @@ export interface IFormItem {
   // 针对特殊属性
   otherOptions?: any;
   isHidden?: boolean;
+  slotName?: string;
 }
 
 export interface IForm {

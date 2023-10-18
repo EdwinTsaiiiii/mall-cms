@@ -1,10 +1,10 @@
 import type { ITable } from "@/base-ui/table";
 
 const contentConfig: ITable = {
-  pageName: "users",
+  pageName: "role",
   header: {
-    title: ["用户列表", "users list"],
-    button: ["新建用户", "create user"]
+    title: ["角色列表", "users list"],
+    button: ["新建角色", "create user"]
   },
   handle: {
     yes: ["确定", "yes"],
@@ -20,51 +20,38 @@ const contentConfig: ITable = {
       label: ["选择", "select"],
       width: 80
     },
-    { field: "index", prop: "index", label: ["序号", "No"], width: 80 },
+    { field: "index", prop: "index", label: ["序号", "No"], width: 100 },
     {
       field: "normal",
       prop: "name",
-      label: ["用户名", "username"],
-      width: 200
+      label: ["角色名称", "role name"],
+      width: 260
     },
     {
       field: "normal",
-      prop: "realname",
-      label: ["真实姓名", "realname"],
-      width: 200
-    },
-    {
-      field: "normal",
-      prop: "cellphone",
-      label: ["手机号码", "cellphone"],
-      width: 200
-    },
-    {
-      field: "status",
-      prop: "enable",
-      label: ["状态", "status"],
-      width: 133,
-      slotName: "status"
+      prop: "intro",
+      label: ["角色权限", "role admission"],
+      width: 260
     },
     {
       field: "time",
       prop: "createAt",
       label: ["创建时间", "creative time"],
-      width: 240,
+      width: 300,
       slotName: "createAt"
     },
     {
       field: "time",
       prop: "updateAt",
       label: ["更新时间", "update time"],
-      width: 240,
+      width: 300,
       slotName: "updateAt"
     },
     {
       field: "handler",
       prop: "",
       label: ["操作", "operation"],
-      width: 240,
+      width: 313,
       slotName: "handler"
     }
   ]

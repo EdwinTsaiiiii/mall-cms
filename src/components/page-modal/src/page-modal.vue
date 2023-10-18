@@ -9,7 +9,7 @@ const dialogVisible = ref(false);
 const isEdit = ref(false);
 const editData = ref();
 
-const props = defineProps<{ modalConfigRef: IForm }>();
+const props = defineProps<{ modalConfigRef: IForm; otherInfo?: any }>();
 
 // 语言
 const mainStore = useMainStore();
@@ -44,10 +44,16 @@ const setDialogVisible = (isNew: boolean, data: any = {}) => {
 const systemStore = useSystemStore();
 const handleConfirmClick = () => {
   const pageName = props.modalConfigRef.pageName;
+  let data = { ...formData };
+  //其他表单外的参数，如修改权限的相关的数据
+  if (props.otherInfo) {
+    data = { ...data, ...props.otherInfo };
+  }
+  // 判断是否编辑
   if (!isEdit.value) {
-    systemStore.newPageDataAction(pageName, formData);
+    systemStore.newPageDataAction(pageName, data);
   } else {
-    systemStore.editPageDataAction(pageName, editData.value.id, formData);
+    systemStore.editPageDataAction(pageName, editData.value.id, data);
   }
   dialogVisible.value = false;
 };
@@ -70,6 +76,7 @@ defineExpose({
           v-bind="modalConfigRef"
           v-model:formData="formData"
         ></SelfForm>
+        <slot></slot>
       </div>
       <template #footer>
         <span class="dialog-footer">

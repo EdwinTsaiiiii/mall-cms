@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive } from "vue";
+import { computed, nextTick, reactive } from "vue";
 import useSystemStore from "@/store/main/system/system";
 import { storeToRefs } from "pinia";
 import SelfTable, { ITable } from "@/base-ui/table";
@@ -26,7 +26,7 @@ const systemStore = useSystemStore();
 const { list, totalCount } = storeToRefs(systemStore);
 
 // 请求数据
-const fetchUserListData = (queryInfo: any = {}) => {
+const fetchListData = (queryInfo: any = {}) => {
   // 获取offset和size
   const size = pageInfo.pageSize;
   const offset = (pageInfo.currentPage - 1) * size;
@@ -37,7 +37,7 @@ const fetchUserListData = (queryInfo: any = {}) => {
     ...queryInfo
   });
 };
-fetchUserListData();
+fetchListData();
 
 // 获取其他的动态插槽名称
 const otherPropSlots: Array<any> = props.contentConfig.tableItems.filter(
@@ -54,7 +54,7 @@ const otherPropSlots: Array<any> = props.contentConfig.tableItems.filter(
 const handleResetClick = () => {
   pageInfo.currentPage = 1;
   pageInfo.pageSize = 10;
-  fetchUserListData();
+  fetchListData();
 };
 
 // 新建用户
@@ -87,7 +87,7 @@ const mapDepartmentId = (parentId: number) => {
 
 // 暴露函数
 defineExpose({
-  fetchUserListData,
+  fetchListData,
   handleResetClick
 });
 </script>
@@ -99,7 +99,7 @@ defineExpose({
       :listData="list"
       :listCount="totalCount"
       v-model:page="pageInfo"
-      @fetch-user-list-data="fetchUserListData"
+      @fetch-list-data="fetchListData"
     >
       <!--Header中的插槽-->
       <template #headerHandler>

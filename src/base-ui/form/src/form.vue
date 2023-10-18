@@ -13,6 +13,7 @@ const lan = computed(() => {
 defineProps<{
   pageName: string;
   style: any;
+  header: any;
   handle: any;
   formItems: IFormItem[];
   formData: any;
@@ -43,14 +44,14 @@ defineExpose({
         <el-col :span="style.colLayout.span">
           <el-form-item :label="item.label[lan]" :prop="item.prop">
             <!--输入类型-->
-            <template v-if="item.type === 'input'">
+            <template v-if="item.field === 'input'">
               <el-input
                 v-model="formData[item.prop]"
                 :placeholder="item.placeholder[lan]"
               />
             </template>
             <!--密码类型-->
-            <template v-if="item.type === 'password'">
+            <template v-if="item.field === 'password'">
               <el-input
                 show-password
                 v-model="formData[item.prop]"
@@ -58,7 +59,7 @@ defineExpose({
               />
             </template>
             <!--选择类型-->
-            <template v-if="item.type === 'select'">
+            <template v-if="item.field === 'select'">
               <el-select
                 v-model="formData[item.prop]"
                 :placeholder="item.placeholder[lan]"
@@ -70,9 +71,9 @@ defineExpose({
               </el-select>
             </template>
             <!--日期选择类型-->
-            <template v-if="item.type === 'datepicker'">
+            <template v-if="item.field === 'datepicker'">
               <el-date-picker
-                :type="item.otherOptions.type"
+                :type="item.otherOptions.field"
                 range-separator="-"
                 :start-placeholder="item.otherOptions.startPlaceholder[lan]"
                 :end-placeholder="item.otherOptions.endPlaceholder[lan]"
