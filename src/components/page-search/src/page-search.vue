@@ -25,10 +25,10 @@ for (const item of props.searchConfig.formItems) {
 const formData = reactive(initialForm);
 
 // 监听按钮的点击
-const formRef = ref<InstanceType<typeof ElForm>>();
+const selfFormRef = ref<InstanceType<typeof SelfForm>>();
 // emit事件回调，子传父
 const handleResetClick = () => {
-  formRef.value?.resetFields();
+  selfFormRef.value.handleResetFields();
   emit("resetClick");
 };
 const handleQueryClick = () => {
@@ -38,7 +38,11 @@ const handleQueryClick = () => {
 
 <template>
   <div class="search">
-    <SelfForm v-bind="searchConfig" v-model:formData="formData">
+    <SelfForm
+      v-bind="searchConfig"
+      v-model:formData="formData"
+      ref="selfFormRef"
+    >
       <template #footer>
         <div class="btns">
           <el-button type="default" @click="handleResetClick">

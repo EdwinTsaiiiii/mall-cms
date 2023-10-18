@@ -4,9 +4,11 @@ import useMainStore from "@/store/main/main";
 import { computed } from "vue";
 
 // 接收参数
-const { header, tableItems } = defineProps<{
+defineProps<{
   header: any;
   tableItems: ITableItems;
+  handle: any;
+  pageName: string;
   listData: any;
   listCount: number;
   page: any;
@@ -28,6 +30,16 @@ const handleCurrentChange = () => {
 };
 const handleSizeChange = () => {
   emit("fetchUserListData");
+};
+
+// 将父部门的id映射到对应的名称上
+const mapDepartmentId = (parentId: number) => {
+  for (const item of mainStore.entireDepartments) {
+    if (parentId == item.id) {
+      return item.name;
+    }
+  }
+  return "";
 };
 </script>
 
@@ -64,9 +76,7 @@ const handleSizeChange = () => {
           >
             <template #default="scope">
               <!-- scope.row某一行的数据 -->
-              <slot :name="item.slotName" :row="scope.row">
-                {{ scope.row[item.prop] }}
-              </slot>
+              <slot :name="item.slotName" :row="scope.row"> </slot>
             </template>
           </el-table-column>
         </template>

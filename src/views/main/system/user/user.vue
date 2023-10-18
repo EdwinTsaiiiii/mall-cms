@@ -7,44 +7,23 @@ import searchConfig from "./config/search.config";
 import contentConfig from "./config/content.config";
 import modalConfig from "./config/modal.config";
 
-import { computed, ref, toRaw } from "vue";
-import useMainStore from "@/store/main/main";
-import { storeToRefs } from "pinia";
+import { computed } from "vue";
+
+import usePageContent from "@/hooks/usePageContent";
+import usePageModal from "@/hooks/usePageModal";
+import useMapOptions from "@/hooks/useMapOptions";
 
 // 计算属性，将初始化option传入配置
+const mapOptions = useMapOptions(modalConfig);
 const modalConfigRef = computed(() => {
-  const mainStore = useMainStore();
-  let { entireRoles, entireDepartments } = storeToRefs(mainStore);
-  entireRoles = toRaw(entireRoles.value) as any;
-  entireDepartments = toRaw(entireDepartments.value) as any;
-  modalConfig.formItems.forEach((item) => {
-    if (item.prop === "roleId" && entireRoles.length) {
-      item.options = [...entireRoles];
-    }
-    if (item.prop === "departmentId" && entireDepartments.length) {
-      item.options = [...entireDepartments];
-    }
-  });
-  return modalConfig;
+  return mapOptions.handleModalConfig();
 });
 
-// search中的查询查询和重置，需要调用到content中的方法
-const contentRef = ref<InstanceType<typeof PageContent>>();
-const handleQueryClick = (searchInfo: any) => {
-  contentRef.value?.fetchUserListData(searchInfo);
-};
-const handleResetClick = () => {
-  contentRef.value?.handleResetClick();
-};
+// content的逻辑处理
+const { contentRef, handleQueryClick, handleResetClick } = usePageContent();
 
-// modal框是用来新建还是编辑
-const modalRef = ref<InstanceType<typeof PageModal>>();
-const handleNewDataClick = () => {
-  modalRef.value?.setDialogVisible();
-};
-const handleEditDataClick = (data: any) => {
-  modalRef.value?.setDialogVisible(false, data);
-};
+// modal的逻辑处理
+const { modalRef, handleNewDataClick, handleEditDataClick } = usePageModal();
 </script>
 
 <template>

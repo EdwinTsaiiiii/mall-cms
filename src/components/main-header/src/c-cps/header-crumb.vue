@@ -7,7 +7,6 @@ import { computed } from "vue";
 const breadcrumb = computed(() => {
   const route = useRoute();
   const loginStore = useLoginStore();
-  console.log(mapPathToBreadCrumbs(loginStore.userMenus, route.path));
   return mapPathToBreadCrumbs(loginStore.userMenus, route.path);
 });
 </script>

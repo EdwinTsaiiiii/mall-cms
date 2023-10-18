@@ -1,32 +1,5 @@
 import MyRequest from "../../index";
 
-export function getUserListData(queryInfo: any) {
-  return MyRequest.post({
-    url: "/users/list",
-    data: queryInfo
-  });
-}
-
-export function newUserData(userInfo: any) {
-  return MyRequest.post({
-    url: "/users",
-    data: userInfo
-  });
-}
-
-export function deleteUserData(id: number) {
-  return MyRequest.delete({
-    url: `/users/${id}`
-  });
-}
-
-export function editUserData(id: number, userinfo: any) {
-  return MyRequest.patch({
-    url: `/users/${id}`,
-    data: userinfo
-  });
-}
-
 /**
  * 各页面通用接口
  */

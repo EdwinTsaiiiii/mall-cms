@@ -3,7 +3,7 @@ import type { IForm } from "@/base-ui/form";
 const modalConfig: IForm = {
   pageName: "users",
   header: {
-    title: ["新建数据", "users list"]
+    title: ["新建数据", "new list"]
   },
   style: {
     dialogWidth: "50%",
@@ -47,7 +47,7 @@ const modalConfig: IForm = {
       prop: "departmentId",
       type: "select",
       label: ["选择部门", "select department"],
-      placeholder: ["请选择部门", "please select your  department"],
+      placeholder: ["请选择部门", "please select your department"],
       options: [{ id: "111", name: "无" }]
     },
     {

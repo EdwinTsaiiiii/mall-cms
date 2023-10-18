@@ -45,6 +45,7 @@ const otherPropSlots: Array<any> = props.contentConfig.tableItems.filter(
     if (item.slotName === "createAt") return false;
     if (item.slotName === "updateAt") return false;
     if (item.slotName === "handler") return false;
+    if (item.slotName === "parentId") return false;
     return true;
   }
 );
@@ -63,7 +64,7 @@ const handleNewData = (data: any) => {
 
 // 删除用户
 const handleDeleteUser = (id: number) => {
-  systemStore.deleteUserDataAction(id);
+  systemStore.deletePageDataAction(props.contentConfig.pageName, id);
 };
 const cancelEvent = () => {
   ElMessage("已取消");
@@ -72,6 +73,16 @@ const cancelEvent = () => {
 // 编辑用户
 const handleEditClick = (data: any) => {
   emit("editDataClick", data);
+};
+
+// 将父部门的id映射到对应的名称上
+const mapDepartmentId = (parentId: number) => {
+  for (const item of mainStore.entireDepartments) {
+    if (parentId == item.id) {
+      return item.name;
+    }
+  }
+  return "";
 };
 
 // 暴露函数
@@ -97,6 +108,9 @@ defineExpose({
         </el-button>
       </template>
       <!-- 列中插槽 -->
+      <template #parentId="scope">
+        <span>{{ mapDepartmentId(scope.row.parentId) }}</span>
+      </template>
       <template #createAt="scope">
         <strong>{{ utcFormat(scope.row.createAt) }}</strong>
       </template>

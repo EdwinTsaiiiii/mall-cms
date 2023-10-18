@@ -7,7 +7,7 @@ export function getEntireRoles() {
 }
 
 export function getEntireDepartment() {
-  return MyRequest.get({
+  return MyRequest.post({
     url: "/department/list"
   });
 }

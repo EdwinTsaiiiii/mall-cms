@@ -13,7 +13,7 @@ const useMainStore = defineStore("main", {
       const entireRoleResult = await getEntireRoles();
       const entireDepartmentResult = await getEntireDepartment();
       this.entireRoles = entireRoleResult.data.list;
-      this.entireDepartments = entireDepartmentResult.data;
+      this.entireDepartments = entireDepartmentResult.data.list;
     },
     switchLanguage() {
       this.language = !this.language;

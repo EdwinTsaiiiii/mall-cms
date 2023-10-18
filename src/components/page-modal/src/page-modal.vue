@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from "vue";
-import useSystemStore from "@/store/main/system/system";
+import { computed, ref, reactive } from "vue";
 import SelfForm from "@/base-ui/form";
 import type { IForm } from "@/base-ui/form";
 import useMainStore from "@/store/main/main";
+import useSystemStore from "@/store/main/system/system";
 
 const dialogVisible = ref(false);
 const isEdit = ref(false);
@@ -17,15 +17,12 @@ const lan = computed(() => {
   return mainStore.language ? 1 : 0;
 });
 
-// 定义数据绑定
-const formData = reactive({
-  name: "",
-  realname: "",
-  password: "",
-  cellphone: "",
-  roleId: "",
-  departmentId: ""
-});
+// 定义数据绑定,formData中的属性应该动态决定
+const form = {};
+for (const item of props.modalConfigRef.formItems) {
+  form[item.prop] = "";
+}
+const formData = reactive(form);
 
 // 定义弹窗（新建或编辑）
 const setDialogVisible = (isNew: boolean, data: any = {}) => {
@@ -46,10 +43,11 @@ const setDialogVisible = (isNew: boolean, data: any = {}) => {
 // 点击确定
 const systemStore = useSystemStore();
 const handleConfirmClick = () => {
+  const pageName = props.modalConfigRef.pageName;
   if (!isEdit.value) {
-    systemStore.newUserDataAction(formData);
+    systemStore.newPageDataAction(pageName, formData);
   } else {
-    systemStore.editUserDataAction(editData.value.id, formData);
+    systemStore.editPageDataAction(pageName, editData.value.id, formData);
   }
   dialogVisible.value = false;
 };

@@ -31,12 +31,10 @@ const router = createRouter({
 export function addRoutesWithMenu(menus: any) {
   // 匹配所有路由信息
   const routes = mapMenuToRoute(menus);
-  console.log(router.getRoutes());
   // 动态添加到router中
   for (const route of routes) {
     router.addRoute("main", route);
   }
-  console.log(routes);
 }
 
 // 前置导航守卫

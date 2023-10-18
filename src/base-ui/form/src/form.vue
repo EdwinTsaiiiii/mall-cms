@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ElForm } from "element-plus";
+import type { FormInstance } from "element-plus";
 import type { IFormItem } from "@/base-ui/form";
 import useMainStore from "@/store/main/main";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 const mainStore = useMainStore();
 const lan = computed(() => {
@@ -10,14 +10,24 @@ const lan = computed(() => {
 });
 
 // 接收参数
-const { style, formItems } = defineProps<{
+defineProps<{
   pageName: string;
   style: any;
+  handle: any;
   formItems: IFormItem[];
   formData: any;
-  entireRoles: any;
-  entireDepartments: any;
 }>();
+
+// 注意取formRef步骤不能在放方法中
+const formRef = ref<FormInstance>();
+
+const handleResetFields = () => {
+  formRef.value?.resetFields();
+};
+
+defineExpose({
+  handleResetFields
+});
 </script>
 
 <template>
