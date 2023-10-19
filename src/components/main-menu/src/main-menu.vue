@@ -33,7 +33,7 @@ function handleItemClick(item: any) {
 <template>
   <div class="logo">
     <img class="img" src="@/assets/logo.svg" alt="" />
-    <h2 class="title" v-show="!isFold">后台管理系统</h2>
+    <h2 class="title" v-show="!isFold">Molly Admin</h2>
   </div>
   <div class="menu">
     <el-menu
