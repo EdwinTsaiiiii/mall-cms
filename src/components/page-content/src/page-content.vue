@@ -46,6 +46,7 @@ const otherPropSlots: Array<any> = props.contentConfig.tableItems.filter(
     if (item.slotName === "updateAt") return false;
     if (item.slotName === "handler") return false;
     if (item.slotName === "parentId") return false;
+    if (item.slotName === "image") return false;
     return true;
   }
 );
@@ -114,6 +115,18 @@ defineExpose({
       <template #createAt="scope">
         <strong>{{ utcFormat(scope.row.createAt) }}</strong>
       </template>
+      <template #image="scope">
+        <el-image
+          style="width: 100px; height: 100px"
+          :src="scope.row.imgUrl"
+          :zoom-rate="1.2"
+          :max-scale="7"
+          :min-scale="0.2"
+          :preview-src-list="[scope.row.imgUrl]"
+          fit="cover"
+          lazy
+        />
+      </template>
       <template #updateAt="scope">
         <span>{{ utcFormat(scope.row.updateAt) }}</span>
       </template>
@@ -163,6 +176,10 @@ defineExpose({
 }
 :global(.el-table__row):hover {
   background-color: var(--day-main-color-hover);
+}
+// 解决表格干扰图片预览的问题
+:global(.el-table .el-table__cell) {
+  position: unset;
 }
 .content {
   margin-top: 20px;

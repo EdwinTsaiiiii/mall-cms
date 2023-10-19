@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { ITableItems } from "@/base-ui/table";
 import useMainStore from "@/store/main/main";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 // 接收参数
-defineProps<{
+const props = defineProps<{
   header: any;
   tableItems: ITableItems;
   handle: any;
@@ -32,6 +32,9 @@ const handleCurrentChange = () => {
 const handleSizeChange = () => {
   emit("fetchListData");
 };
+
+// 动态参数
+let dynamic = ref(props.pageName === "menu" ? "field" : "type");
 </script>
 
 <template>
@@ -56,7 +59,7 @@ const handleSizeChange = () => {
         <template v-if="normalColumn.includes(item.field)">
           <el-table-column
             align="center"
-            :type="item.field"
+            :[dynamic]="item.field"
             :prop="item.prop"
             :label="item.label[lan]"
             :width="item.width"

@@ -47,7 +47,7 @@ const { modalRef, handleNewDataClick, handleEditDataClick } = usePageModal();
         class="ml-2"
         :type="scope.row.enable === 1 ? 'success' : 'danger'"
       >
-        {{ scope.row.enable === 1 ? "启用/on" : "禁用/off" }}
+        {{ scope.row.enable === 1 ? "启用" : "禁用" }}
       </el-tag>
     </template>
   </pageContent>

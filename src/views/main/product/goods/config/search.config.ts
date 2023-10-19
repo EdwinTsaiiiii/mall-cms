@@ -1,7 +1,7 @@
 import type { IForm } from "@/base-ui/form";
 
 const searchConfig: IForm = {
-  pageName: "user",
+  pageName: "goods",
   header: [],
   style: {
     labelWidth: "120px",
@@ -23,28 +23,14 @@ const searchConfig: IForm = {
       field: "input",
       label: ["id", "id"],
       rules: [],
-      placeholder: ["请输入id", "please input your id"]
+      placeholder: ["请输入id", "please input id"]
     },
     {
       prop: "name",
       field: "input",
-      label: ["用户名", "username"],
+      label: ["商品名称", "goods name"],
       rules: [],
-      placeholder: ["请输入用户名", "please input your username"]
-    },
-    {
-      prop: "realname",
-      field: "input",
-      label: ["真实姓名", "realname"],
-      rules: [],
-      placeholder: ["请输入真实姓名", "please input your real name"]
-    },
-    {
-      prop: "cellphone",
-      field: "input",
-      label: ["手机号码", "cellphone"],
-      rules: [],
-      placeholder: ["请输入手机号码", "please input your cellphone"]
+      placeholder: ["请输入商品名称", "please input goods name"]
     },
     {
       prop: "enable",
@@ -54,14 +40,21 @@ const searchConfig: IForm = {
       placeholder: ["请选择状态", "please select status"],
       options: [
         {
-          id: 1,
-          name: "启用"
+          name: "已上架/on",
+          id: 1
         },
         {
-          id: 0,
-          name: "禁用"
+          name: "已下架/off",
+          id: 0
         }
       ]
+    },
+    {
+      prop: "address",
+      field: "input",
+      label: ["地址", "address"],
+      rules: [],
+      placeholder: ["请输入商品地址", "please input goods address"]
     },
     {
       prop: "createAt",
