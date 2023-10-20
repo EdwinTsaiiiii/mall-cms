@@ -39,6 +39,18 @@ const { modalRef, handleNewDataClick, handleEditDataClick } = usePageModal();
         {{ scope.row.enable === 1 ? "已上架" : "已下架" }}
       </el-tag>
     </template>
+    <template #image="scope">
+      <el-image
+        style="width: 100px; height: 100px"
+        :src="scope.row.imgUrl"
+        :zoom-rate="1.2"
+        :max-scale="7"
+        :min-scale="0.2"
+        :preview-src-list="[scope.row.imgUrl]"
+        fit="cover"
+        lazy
+      />
+    </template>
   </pageContent>
   <!-- 3.新建和编辑 -->
   <page-modal ref="modalRef" :modal-config-ref="modalConfig" />

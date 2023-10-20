@@ -2,8 +2,9 @@ export interface ITableItems {
   field: string;
   prop: string;
   label: string[];
-  width: number;
+  minWidth?: number;
   slotName?: string;
+  isShow: boolean;
 }
 export interface ITable {
   pageName: string;

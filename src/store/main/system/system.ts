@@ -54,6 +54,12 @@ const useSystemStore = defineStore("system", {
         ElMessage.error(result.msg);
       }
       this.getDataListAction(pageName, { offset: 0, size: 10 });
+    },
+
+    // 清空数据
+    resetData() {
+      this.list = [];
+      this.totalCount = 0;
     }
   }
 });

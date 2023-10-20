@@ -68,7 +68,6 @@ defineExpose({
     <el-dialog
       v-model="dialogVisible"
       :title="modalConfigRef.header.title[lan]"
-      width="30%"
       center
     >
       <div class="form">

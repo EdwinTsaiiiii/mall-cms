@@ -15,38 +15,42 @@ const contentConfig: ITable = {
   },
   tableItems: [
     {
-      field: "selection",
-      prop: "select",
-      label: ["选择", "select"],
-      width: 100
+      field: "normal",
+      prop: "id",
+      label: ["序号", "No"],
+      minWidth: 80,
+      isShow: true
     },
-    { field: "index", prop: "index", label: ["序号", "No"], width: 100 },
     {
       field: "normal",
       prop: "name",
       label: ["商品类别", "goods category"],
-      width: 300
+      isShow: true,
+      minWidth: 80
     },
     {
       field: "time",
       prop: "createAt",
       label: ["创建时间", "created time"],
-      width: 350,
-      slotName: "createAt"
+      slotName: "createAt",
+      isShow: true,
+      minWidth: 100
     },
     {
       field: "time",
       prop: "updateAt",
       label: ["更新时间", "updated time"],
-      width: 350,
-      slotName: "updateAt"
+      slotName: "updateAt",
+      isShow: true,
+      minWidth: 100
     },
     {
       field: "handler",
       prop: "",
       label: ["操作", "operation"],
-      width: 413,
-      slotName: "handler"
+      slotName: "handler",
+      isShow: true,
+      minWidth: 80
     }
   ]
 };

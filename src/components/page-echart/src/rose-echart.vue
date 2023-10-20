@@ -2,14 +2,13 @@
 import { computed } from "vue";
 import BaseEchart from "@/base-ui/echart";
 import { IDataType } from "../types";
+
 const props = defineProps<{
   roseData: IDataType[];
 }>();
+
 const options: any = computed(() => {
   return {
-    // legend: {
-    //   top: 'bottom'
-    // },
     toolbox: {
       show: true,
       feature: {

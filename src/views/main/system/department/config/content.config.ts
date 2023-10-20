@@ -18,48 +18,61 @@ const contentConfig: ITable = {
       field: "selection",
       prop: "select",
       label: ["选择", "select"],
-      width: 80
+      minWidth: 80,
+      isShow: true
     },
-    { field: "index", prop: "index", label: ["序号", "No"], width: 80 },
+    {
+      field: "normal",
+      prop: "id",
+      label: ["id", "id"],
+      minWidth: 50,
+      isShow: true
+    },
     {
       field: "normal",
       prop: "name",
       label: ["部门名称", "department name"],
-      width: 240
+      minWidth: 80,
+      isShow: true
     },
     {
       field: "normal",
       prop: "leader",
       label: ["部门领导", "department leader"],
-      width: 240
+      minWidth: 80,
+      isShow: true
     },
     {
       field: "parent",
       prop: "parentId",
       label: ["上级部门", "superior department"],
-      width: 240,
-      slotName: "parentId"
+      minWidth: 80,
+      slotName: "parentId",
+      isShow: true
     },
     {
       field: "time",
       prop: "createAt",
       label: ["创建时间", "creative time"],
-      width: 240,
-      slotName: "createAt"
+      minWidth: 100,
+      slotName: "createAt",
+      isShow: true
     },
     {
       field: "time",
       prop: "updateAt",
       label: ["更新时间", "update time"],
-      width: 240,
-      slotName: "updateAt"
+      minWidth: 100,
+      slotName: "updateAt",
+      isShow: true
     },
     {
       field: "handler",
       prop: "",
       label: ["操作", "operation"],
-      width: 253,
-      slotName: "handler"
+      minWidth: 80,
+      slotName: "handler",
+      isShow: true
     }
   ]
 };

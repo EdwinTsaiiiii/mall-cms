@@ -2,16 +2,10 @@
 import { computed } from "vue";
 import BaseEchart from "@/base-ui/echart";
 
-const props = withDefaults(
-  defineProps<{
-    title: string;
-    xLabels: string[];
-    values: any[];
-  }>(),
-  {
-    title: ""
-  }
-);
+const props = defineProps<{
+  xLabels: string[];
+  values: any[];
+}>();
 const options: any = computed(() => {
   return {
     tooltip: {

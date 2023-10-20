@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import type { EChartsOption } from "echarts";
 import { defineProps, onMounted, ref, withDefaults, watchEffect } from "vue";
 import useEchart from "../hooks/useEchart";
 
 const props = withDefaults(
   defineProps<{
-    options: EChartsOption;
+    options: any;
     width?: string;
     height?: string;
   }>(),

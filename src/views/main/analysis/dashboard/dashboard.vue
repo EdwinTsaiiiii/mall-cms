@@ -3,6 +3,13 @@ import useAnalysisStore from "@/store/main/analysis/analysis";
 import { PlotCard, NumberCard } from "@/base-ui/card";
 import CountTo from "@/components/count-to";
 import { computed } from "vue";
+import {
+  PieEchart,
+  RoseEchart,
+  LineEchart,
+  BarEchart,
+  MapEchart
+} from "@/components/page-echart";
 
 const store = useAnalysisStore();
 

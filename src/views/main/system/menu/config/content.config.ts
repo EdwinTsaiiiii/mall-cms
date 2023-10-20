@@ -19,48 +19,76 @@ const contentConfig: ITable = {
       field: "normal",
       prop: "name",
       label: ["菜单名称", "menu name"],
-      width: 180
+      minWidth: 80,
+      isShow: true
     },
-    { field: "normal", prop: "type", label: ["级别", "level"], width: 103 },
+    {
+      field: "normal",
+      prop: "type",
+      label: ["级别", "level"],
+      minWidth: 80,
+      isShow: true
+    },
     {
       field: "normal",
       prop: "url",
       label: ["菜单url", "menu url"],
-      width: 210
+      minWidth: 140,
+      isShow: true
+    },
+    {
+      field: "icon",
+      prop: "icon",
+      label: ["菜单icon", "menu icon"],
+      slotName: "icon",
+      minWidth: 60,
+      isShow: true
     },
     {
       field: "normal",
-      prop: "icon",
-      label: ["菜单icon", "menu icon"],
-      width: 210
+      prop: "sort",
+      label: ["排序", "sort"],
+      minWidth: 60,
+      isShow: true
     },
-    { field: "normal", prop: "sort", label: ["排序", "sort"], width: 90 },
+    {
+      field: "type",
+      prop: "type",
+      label: ["菜单类型", "menu type"],
+      slotName: "type",
+      minWidth: 120,
+      isShow: true
+    },
     {
       field: "normal",
       prop: "permission",
       label: ["权限", "admission"],
-      width: 210
+      minWidth: 120,
+      isShow: true
     },
     {
       field: "time",
       prop: "createAt",
       label: ["创建时间", "created time"],
-      width: 200,
-      slotName: "createAt"
+      slotName: "createAt",
+      minWidth: 100,
+      isShow: true
     },
     {
       field: "time",
       prop: "updateAt",
       label: ["更新时间", "updated time"],
-      width: 200,
-      slotName: "updateAt"
+      slotName: "updateAt",
+      minWidth: 100,
+      isShow: true
     },
     {
       field: "handler",
       prop: "",
       label: ["操作", "operation"],
-      width: 227,
-      slotName: "handler"
+      slotName: "handler",
+      minWidth: 80,
+      isShow: true
     }
   ],
   childrenProps: {

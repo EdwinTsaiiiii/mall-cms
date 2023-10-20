@@ -105,3 +105,17 @@ export function mapMenuToIds(menus: any[]) {
   _recurseGetId(menus);
   return ids;
 }
+
+export function mapTypeToId(menus: any[]) {
+  const expendKeys: string[] = [];
+  function _recurseGetId(menuList: any[]) {
+    for (const menu of menuList) {
+      if (menu.children && menu.type == 1) {
+        _recurseGetId(menu.children);
+      }
+      expendKeys.push(menu.id + "");
+    }
+  }
+  _recurseGetId(menus);
+  return expendKeys;
+}
