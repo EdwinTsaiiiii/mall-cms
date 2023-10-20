@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed, nextTick, reactive } from "vue";
+import { computed, reactive, ref } from "vue";
 import useSystemStore from "@/store/main/system/system";
 import { storeToRefs } from "pinia";
 import SelfTable, { ITable } from "@/base-ui/table";
 import { utcFormat } from "@/utils/format";
 import useMainStore from "@/store/main/main";
+import { mapTypeToId } from "@/utils/map-menu";
 
 const emit = defineEmits(["newDataClick", "editDataClick"]);
 
@@ -25,19 +26,37 @@ const lan = computed(() => {
 const systemStore = useSystemStore();
 const { list, totalCount } = storeToRefs(systemStore);
 
+// 关于tree表格展开的操作
+const expandKeys = ref<any>([]);
+const isExpand = ref<boolean>(false);
+
 // 请求数据
-const fetchListData = (queryInfo: any = {}) => {
+const fetchListData = async (queryInfo: any = {}) => {
   // 获取offset和size
   const size = pageInfo.pageSize;
   const offset = (pageInfo.currentPage - 1) * size;
   // 发送网络请求
-  systemStore.getDataListAction(props.contentConfig.pageName, {
+  await systemStore.getDataListAction(props.contentConfig.pageName, {
     size,
     offset,
     ...queryInfo
   });
+
+  // 可以展开的row
+  // if (props.contentConfig.pageName === "menu") {
+  //   expandKeys.value = mapTypeToId(systemStore.list);
+  // }
 };
 fetchListData();
+
+const handleExpend = () => {
+  isExpand.value = !isExpand.value;
+  if (isExpand.value) {
+    expandKeys.value = mapTypeToId(systemStore.list);
+  } else {
+    expandKeys.value = [];
+  }
+};
 
 // 获取其他的动态插槽名称
 const otherPropSlots: Array<any> = props.contentConfig.tableItems.filter(
@@ -46,7 +65,6 @@ const otherPropSlots: Array<any> = props.contentConfig.tableItems.filter(
     if (item.slotName === "updateAt") return false;
     if (item.slotName === "handler") return false;
     if (item.slotName === "parentId") return false;
-    if (item.slotName === "image") return false;
     return true;
   }
 );
@@ -86,6 +104,15 @@ const mapDepartmentId = (parentId: number) => {
   return "";
 };
 
+// 获取列名并重组数据结构制作动态列
+const checkedList = [];
+props.contentConfig.tableItems.forEach((item) => {
+  if (item.isShow) {
+    checkedList.push(item.label[0]);
+  }
+});
+const checkedListRef = ref(checkedList);
+
 // 暴露函数
 defineExpose({
   fetchListData,
@@ -97,6 +124,8 @@ defineExpose({
   <div class="content">
     <SelfTable
       v-bind="contentConfig"
+      :checkedList="checkedListRef"
+      :expandKeys="expandKeys"
       :listData="list"
       :listCount="totalCount"
       v-model:page="pageInfo"
@@ -104,10 +133,33 @@ defineExpose({
     >
       <!--Header中的插槽-->
       <template #headerHandler>
-        <el-button size="default" @click="handleNewData">
+        <el-button type="primary" icon="plus" @click="handleNewData">
           {{ contentConfig.header.button[lan] }}
         </el-button>
+        <el-button
+          type="warning"
+          @click="handleExpend"
+          v-if="contentConfig.pageName === 'menu'"
+        >
+          {{ isExpand ? "收起所有" : "展开所有" }}
+        </el-button>
+        <el-popover placement="bottom" trigger="hover">
+          <template #reference>
+            <el-button size="default" icon="grid"></el-button>
+          </template>
+          <el-checkbox-group v-model="checkedListRef">
+            <el-checkbox
+              v-for="item in contentConfig.tableItems"
+              :key="item.label[0]"
+              :label="item.label[0]"
+              style="width: 100%"
+            >
+              {{ item.label[lan] }}
+            </el-checkbox>
+          </el-checkbox-group>
+        </el-popover>
       </template>
+
       <!-- 列中插槽 -->
       <template #parentId="scope">
         <span>{{ mapDepartmentId(scope.row.parentId) }}</span>
@@ -115,30 +167,15 @@ defineExpose({
       <template #createAt="scope">
         <strong>{{ utcFormat(scope.row.createAt) }}</strong>
       </template>
-      <template #image="scope">
-        <el-image
-          style="width: 100px; height: 100px"
-          :src="scope.row.imgUrl"
-          :zoom-rate="1.2"
-          :max-scale="7"
-          :min-scale="0.2"
-          :preview-src-list="[scope.row.imgUrl]"
-          fit="cover"
-          lazy
-        />
-      </template>
       <template #updateAt="scope">
         <span>{{ utcFormat(scope.row.updateAt) }}</span>
       </template>
       <template #handler="scope">
-        <el-link
-          type="primary"
-          icon="EditPen"
-          :underline="false"
+        <el-button
+          size="small"
+          icon="Edit"
           @click="handleEditClick(scope.row)"
-        >
-          {{ contentConfig.handle.edit[lan] }}
-        </el-link>
+        />
         <el-popconfirm
           width="220"
           :confirm-button-text="contentConfig.handle.yes[lan]"
@@ -149,12 +186,11 @@ defineExpose({
           @cancel="cancelEvent"
         >
           <template #reference>
-            <el-link type="danger" icon="Delete" :underline="false">
-              {{ contentConfig.handle.delete[lan] }}
-            </el-link>
+            <el-button size="small" type="danger" icon="Delete" />
           </template>
         </el-popconfirm>
       </template>
+
       <!-- 其他各页面特有的插槽 -->
       <template
         v-for="item in otherPropSlots"

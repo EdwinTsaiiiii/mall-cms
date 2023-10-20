@@ -2,9 +2,11 @@
 import { defineProps, computed } from "vue";
 import BaseEchart from "@/base-ui/echart";
 import { IDataType } from "../types";
+
 const props = defineProps<{
   pieData: IDataType[];
 }>();
+
 // 采用computed保证上面的视图会随着传入数据的变化而重新渲染
 const options: any = computed(() => {
   return {

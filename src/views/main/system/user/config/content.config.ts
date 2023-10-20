@@ -18,54 +18,75 @@ const contentConfig: ITable = {
       field: "selection",
       prop: "select",
       label: ["选择", "select"],
-      width: 80
+      isShow: true,
+      minWidth: 80
     },
-    { field: "index", prop: "index", label: ["序号", "No"], width: 80 },
+    {
+      field: "index",
+      prop: "index",
+      label: ["序号", "No"],
+      isShow: true,
+      minWidth: 80
+    },
+    {
+      field: "normal",
+      prop: "id",
+      label: ["id", "id"],
+      minWidth: 50,
+      isShow: true
+    },
     {
       field: "normal",
       prop: "name",
       label: ["用户名", "username"],
-      width: 200
+      isShow: true,
+      minWidth: 80
     },
     {
       field: "normal",
       prop: "realname",
       label: ["真实姓名", "realname"],
-      width: 200
+      isShow: true,
+      minWidth: 80
     },
     {
       field: "normal",
       prop: "cellphone",
       label: ["手机号码", "cellphone"],
-      width: 200
+      isShow: true,
+      minWidth: 80
     },
     {
       field: "status",
       prop: "enable",
       label: ["状态", "status"],
-      width: 133,
-      slotName: "status"
+      slotName: "status",
+      isShow: true,
+      minWidth: 50
     },
     {
       field: "time",
       prop: "createAt",
       label: ["创建时间", "creative time"],
-      width: 240,
-      slotName: "createAt"
+      slotName: "createAt",
+      isShow: true,
+      minWidth: 100
     },
     {
       field: "time",
       prop: "updateAt",
       label: ["更新时间", "update time"],
-      width: 240,
-      slotName: "updateAt"
+      slotName: "updateAt",
+      isShow: true,
+      minWidth: 100
     },
     {
       field: "handler",
       prop: "",
       label: ["操作", "operation"],
-      width: 240,
-      slotName: "handler"
+      slotName: "handler",
+      isShow: true,
+      minWidth: 80
     }
   ]
 };

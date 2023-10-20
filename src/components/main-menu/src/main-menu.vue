@@ -3,6 +3,7 @@ import useLoginStore from "@/store/login/login";
 import { useRoute, useRouter } from "vue-router";
 import { mapPathToMenus } from "@/utils/map-menu";
 import { computed } from "vue";
+import useSystemStore from "@/store/main/system/system";
 
 // 定义props
 defineProps({
@@ -23,9 +24,13 @@ const defaultValue = computed(() => {
   return currentMenu.id + "";
 });
 
+const systemStore = useSystemStore();
+
 // 监听item变化
 const router = useRouter();
 function handleItemClick(item: any) {
+  // 在切换前先把store中数据清空避免干扰
+  systemStore.resetData();
   router.push(item.url);
 }
 </script>

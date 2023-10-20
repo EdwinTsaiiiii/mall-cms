@@ -74,6 +74,7 @@ function editCallback(data: any) {
     :otherInfo="otherInfo"
   >
     <div class="menu-tree">
+      <span class="title">权限</span>
       <el-tree
         ref="treeRef"
         :data="entireMenus"
@@ -91,5 +92,9 @@ function editCallback(data: any) {
 .menu-tree {
   margin-left: 80px;
   margin-top: 20px;
+  display: flex;
+  .title {
+    margin: 0 6px 0 60px;
+  }
 }
 </style>

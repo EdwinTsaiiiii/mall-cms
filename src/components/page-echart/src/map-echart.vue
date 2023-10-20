@@ -4,15 +4,10 @@ import BaseEchart from "@/base-ui/echart";
 import { IDataType } from "../types";
 import { convertData } from "../utils/convert-data";
 
-const props = withDefaults(
-  defineProps<{
-    title?: string;
-    mapData: IDataType[];
-  }>(),
-  {
-    title: ""
-  }
-);
+const props = defineProps<{
+  mapData: IDataType[];
+}>();
+
 // 先绕过类型检查 EChartsOption
 const options: any = computed(() => {
   return {

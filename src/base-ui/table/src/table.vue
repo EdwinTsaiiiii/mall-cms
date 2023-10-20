@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import type { ITableItems } from "@/base-ui/table";
 import useMainStore from "@/store/main/main";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 
 // 接收参数
 const props = defineProps<{
   header: any;
   tableItems: ITableItems;
+  checkedList: Array<any>;
   handle: any;
   pageName: string;
   listData: any;
   listCount: number;
   page: any;
   childrenProps?: any;
+  expandKeys: Array<any>;
 }>();
 
 // 语言
@@ -54,6 +56,8 @@ let dynamic = ref(props.pageName === "menu" ? "field" : "type");
       :border="true"
       style="width: 100%"
       v-bind="childrenProps"
+      row-key="id"
+      :expand-row-keys="expandKeys"
     >
       <template v-for="item in tableItems || []" :key="item.prop">
         <template v-if="normalColumn.includes(item.field)">
@@ -61,8 +65,10 @@ let dynamic = ref(props.pageName === "menu" ? "field" : "type");
             align="center"
             :[dynamic]="item.field"
             :prop="item.prop"
+            v-if="checkedList.includes(item.label[0])"
             :label="item.label[lan]"
-            :width="item.width"
+            :width="item.prop === 'index' ? 60 : ''"
+            :min-width="item.minWidth"
           />
         </template>
         <template v-else>
@@ -70,8 +76,9 @@ let dynamic = ref(props.pageName === "menu" ? "field" : "type");
             :type="item.field"
             :prop="item.prop"
             :label="item.label[lan]"
-            :width="item.width"
+            v-if="checkedList.includes(item.label[0])"
             align="center"
+            :min-width="item.minWidth"
           >
             <template #default="scope">
               <!-- scope.row某一行的数据 -->
@@ -85,6 +92,7 @@ let dynamic = ref(props.pageName === "menu" ? "field" : "type");
   <!--底部-->
   <div class="footer">
     <el-pagination
+      background
       v-model:currentPage="page.currentPage"
       v-model:page-size="page.pageSize"
       :page-sizes="[10, 20, 30]"
@@ -116,7 +124,7 @@ let dynamic = ref(props.pageName === "menu" ? "field" : "type");
 
 .table {
   :deep(.el-table__cell) {
-    padding: 14px 0;
+    padding: 8px 0;
   }
 }
 
