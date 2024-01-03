@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { LOGIN_TOKEN } from "@/global/constant";
 import { localCache } from "@/utils/cache";
 import { firstRoute, mapMenuToRoute } from "@/utils/map-menu";
+// @ts-ignore
+import NProgress from "nprogress";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -40,6 +42,8 @@ export function addRoutesWithMenu(menus: any) {
 // 前置导航守卫
 router.beforeEach((to) => {
   const token = localCache.getCache(LOGIN_TOKEN);
+  NProgress.start();
+
   if (to.path.startsWith("/main") && !token) {
     return "/login";
   }
@@ -47,6 +51,11 @@ router.beforeEach((to) => {
   if (to.path === "/main" && firstRoute) {
     return firstRoute.path;
   }
+});
+
+router.afterEach(() => {
+  // 在即将进入新的页面组件前，关闭掉进度条
+  NProgress.done();
 });
 
 export default router;

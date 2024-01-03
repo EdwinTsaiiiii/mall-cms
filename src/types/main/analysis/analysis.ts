@@ -1,5 +1,3 @@
-import { getGoodsAmountList } from "@/service/main/analysis/dashboard";
-
 export interface IAnalysis {
   categoryGoodsCount: ICategoryGoodsCount[];
   categoryGoodsSale: ICategoryGoodsSale[];

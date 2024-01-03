@@ -57,6 +57,7 @@ declare module 'vue' {
     MainHeader: typeof import('./src/components/main-header/src/main-header.vue')['default']
     MainMenu: typeof import('./src/components/main-menu/src/main-menu.vue')['default']
     MapEchart: typeof import('./src/components/page-echart/src/map-echart.vue')['default']
+    MockItem: typeof import('./src/components/mock-item/src/mock-item.vue')['default']
     PageContent: typeof import('./src/components/page-content/src/page-content.vue')['default']
     PageModal: typeof import('./src/components/page-modal/src/page-modal.vue')['default']
     PageSearch: typeof import('./src/components/page-search/src/page-search.vue')['default']
@@ -64,6 +65,7 @@ declare module 'vue' {
     RoseEchart: typeof import('./src/components/page-echart/src/rose-echart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Tabs: typeof import('./src/components/tabs/src/tabs.vue')['default']
     TextLinks: typeof import('./src/components/text-links/src/text-links.vue')['default']
   }
   export interface ComponentCustomProperties {

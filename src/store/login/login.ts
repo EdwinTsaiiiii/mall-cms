@@ -13,12 +13,14 @@ import type { ILoginState } from "@/types/login/login";
 import { ElMessage } from "element-plus";
 import { addRoutesWithMenu } from "@/router";
 import useMainStore from "@/store/main/main";
+import { mapMenusToPermission } from "@/utils/map-menu";
 
 const useLoginStore = defineStore("login", {
   state: (): ILoginState => ({
     token: "",
     userInfo: {},
-    userMenus: []
+    userMenus: [],
+    permissions: []
   }),
   actions: {
     // 登录操作
@@ -52,7 +54,7 @@ const useLoginStore = defineStore("login", {
       addRoutesWithMenu(this.userMenus);
 
       // 6.进行页面跳转
-      router.push("/main");
+      router.push("/main/analysis/dashboard");
 
       ElMessage.success("登录成功");
     },
@@ -66,6 +68,9 @@ const useLoginStore = defineStore("login", {
       // 加载role和department
       const mainStore = useMainStore();
       mainStore.fetchEntireData();
+
+      // 映射用户权限
+      this.permissions = mapMenusToPermission(this.userMenus);
 
       // 加载动态路由
       addRoutesWithMenu(this.userMenus);

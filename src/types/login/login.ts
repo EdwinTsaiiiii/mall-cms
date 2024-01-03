@@ -56,4 +56,5 @@ export interface ILoginState {
   token: string;
   userInfo: IUserInfo | {};
   userMenus: IUserMenus[];
+  permissions: string[];
 }

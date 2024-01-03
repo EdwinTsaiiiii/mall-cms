@@ -8,6 +8,7 @@ export interface ITableItems {
 }
 export interface ITable {
   pageName: string;
+  permissionName: string;
   tableItems: ITableItems[];
   header: any;
   handle?: any;

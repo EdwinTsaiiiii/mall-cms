@@ -2,6 +2,7 @@ import type { ITable } from "@/base-ui/table";
 
 const contentConfig: ITable = {
   pageName: "goods",
+  permissionName: "product",
   header: {
     title: ["商品列表", "goods list"],
     button: ["新建商品", "create goods"]

@@ -3,6 +3,7 @@ import type { ITable } from "@/base-ui/table";
 // 注意使用element-plus时，不能在tableItems中设置type，因为element-plus中的展开原理是给行元素添加type=expend所以导致冲突
 const contentConfig: ITable = {
   pageName: "menu",
+  permissionName: "system",
   header: {
     title: ["菜单列表", "menu list"],
     button: ["新建菜单", "create menu"]

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import type { ITableItems } from "@/base-ui/table";
 import useMainStore from "@/store/main/main";
+<<<<<<< HEAD
 import { computed, ref, watch } from "vue";
+=======
+import { computed, onMounted, ref, watch } from "vue";
+>>>>>>> update2
 
 // 接收参数
 const props = defineProps<{
@@ -10,12 +14,19 @@ const props = defineProps<{
   checkedList: Array<any>;
   handle: any;
   pageName: string;
+  permissionName: string;
   listData: any;
   listCount: number;
   page: any;
   childrenProps?: any;
   expandKeys: Array<any>;
 }>();
+
+// 加载
+const loading = ref<boolean>(true);
+onMounted(() => {
+  loading.value = false;
+});
 
 // 语言
 const mainStore = useMainStore();
@@ -58,6 +69,10 @@ let dynamic = ref(props.pageName === "menu" ? "field" : "type");
       v-bind="childrenProps"
       row-key="id"
       :expand-row-keys="expandKeys"
+<<<<<<< HEAD
+=======
+      v-loading="loading"
+>>>>>>> update2
     >
       <template v-for="item in tableItems || []" :key="item.prop">
         <template v-if="normalColumn.includes(item.field)">

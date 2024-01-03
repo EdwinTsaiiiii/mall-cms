@@ -2,6 +2,7 @@ import type { ITable } from "@/base-ui/table";
 
 const contentConfig: ITable = {
   pageName: "department",
+  permissionName: "system",
   header: {
     title: ["部门列表", "department list"],
     button: ["新建部门", "create department"]

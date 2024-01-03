@@ -2,6 +2,7 @@ import type { ITable } from "@/base-ui/table";
 
 const contentConfig: ITable = {
   pageName: "category",
+  permissionName: "product",
   header: {
     title: ["分类列表", "category list"],
     button: ["新建分类", "create category"]

@@ -4,6 +4,10 @@ import { useRoute, useRouter } from "vue-router";
 import { mapPathToMenus } from "@/utils/map-menu";
 import { computed } from "vue";
 import useSystemStore from "@/store/main/system/system";
+<<<<<<< HEAD
+=======
+import useMultipleTabStore from "@/store/main/modules/multipleTab";
+>>>>>>> update2
 
 // 定义props
 defineProps({
@@ -15,6 +19,7 @@ defineProps({
 
 // 获取动态菜单
 const loginStore = useLoginStore();
+const multipleTabStore = useMultipleTabStore();
 const userMenus = loginStore.userMenus;
 
 // 默认显示页面（刷新不改变页面）以及点击面包屑menu的active自动变化
@@ -25,13 +30,19 @@ const defaultValue = computed(() => {
 });
 
 const systemStore = useSystemStore();
+<<<<<<< HEAD
 
+=======
+>>>>>>> update2
 // 监听item变化
 const router = useRouter();
 function handleItemClick(item: any) {
   // 在切换前先把store中数据清空避免干扰
   systemStore.resetData();
   router.push(item.url);
+
+  console.log(route);
+  multipleTabStore.addTab({ id: item.id, name: item.name, url: item.url });
 }
 </script>
 
