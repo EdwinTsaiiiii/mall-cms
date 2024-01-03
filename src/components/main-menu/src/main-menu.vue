@@ -4,10 +4,7 @@ import { useRoute, useRouter } from "vue-router";
 import { mapPathToMenus } from "@/utils/map-menu";
 import { computed } from "vue";
 import useSystemStore from "@/store/main/system/system";
-<<<<<<< HEAD
-=======
 import useMultipleTabStore from "@/store/main/modules/multipleTab";
->>>>>>> update2
 
 // 定义props
 defineProps({
@@ -30,10 +27,7 @@ const defaultValue = computed(() => {
 });
 
 const systemStore = useSystemStore();
-<<<<<<< HEAD
 
-=======
->>>>>>> update2
 // 监听item变化
 const router = useRouter();
 function handleItemClick(item: any) {

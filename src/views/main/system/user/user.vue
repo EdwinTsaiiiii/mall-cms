@@ -7,7 +7,7 @@ import searchConfig from "./config/search.config";
 import contentConfig from "./config/content.config";
 import modalConfig from "./config/modal.config";
 
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 
 import usePageContent from "@/hooks/usePageContent";
 import usePageModal from "@/hooks/usePageModal";
@@ -41,37 +41,6 @@ const { modalRef, handleNewDataClick, handleEditDataClick } = usePageModal();
 </script>
 
 <template>
-<<<<<<< HEAD
-  <!-- 1.搜索区域 -->
-  <pageSearch
-    :search-config="searchConfig"
-    @query-click="handleQueryClick"
-    @reset-click="handleResetClick"
-  />
-  <!-- 2.展示区域 -->
-  <pageContent
-    :content-config="contentConfig"
-    @new-data-click="handleNewDataClick"
-    @edit-data-click="handleEditDataClick"
-    ref="contentRef"
-  >
-    <template #status="scope">
-      <el-switch
-        v-model="scope.row.enable"
-        :width="55"
-        size="large"
-        inline-prompt
-        active-text="启用"
-        inactive-text="禁用"
-        :active-value="1"
-        :inactive-value="0"
-        @change="handleChangeStatus(scope.row)"
-      />
-    </template>
-  </pageContent>
-  <!-- 3.新建和编辑 -->
-  <page-modal ref="modalRef" :modal-config-ref="modalConfigRef" />
-=======
   <div class="users">
     <!-- 1.搜索区域 -->
     <pageSearch
@@ -103,7 +72,6 @@ const { modalRef, handleNewDataClick, handleEditDataClick } = usePageModal();
     <!-- 3.新建和编辑 -->
     <page-modal ref="modalRef" :modal-config-ref="modalConfigRef" />
   </div>
->>>>>>> update2
 </template>
 
 <style scoped lang="less">

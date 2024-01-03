@@ -6,10 +6,7 @@ import SelfTable, { ITable } from "@/base-ui/table";
 import { utcFormat } from "@/utils/format";
 import useMainStore from "@/store/main/main";
 import { mapTypeToId } from "@/utils/map-menu";
-<<<<<<< HEAD
-=======
 import { usePermission } from "@/utils/usePermission";
->>>>>>> update2
 
 const emit = defineEmits(["newDataClick", "editDataClick"]);
 
@@ -57,13 +54,9 @@ const expandKeys = ref<any>([]);
 const isExpand = ref<boolean>(false);
 
 // 请求数据
-<<<<<<< HEAD
 const fetchListData = async (queryInfo: any = {}) => {
-=======
-const fetchListData = (queryInfo: any = {}) => {
   // 如果没有权限直接返回
   if (!isQuery) return;
->>>>>>> update2
   // 获取offset和size
   const size = pageInfo.pageSize;
   const offset = (pageInfo.currentPage - 1) * size;
@@ -73,10 +66,6 @@ const fetchListData = (queryInfo: any = {}) => {
     offset,
     ...queryInfo
   });
-<<<<<<< HEAD
-
-=======
->>>>>>> update2
   // 可以展开的row
   // if (props.contentConfig.pageName === "menu") {
   //   expandKeys.value = mapTypeToId(systemStore.list);
@@ -168,16 +157,12 @@ defineExpose({
     >
       <!--Header中的插槽-->
       <template #headerHandler>
-<<<<<<< HEAD
-        <el-button type="primary" icon="plus" @click="handleNewData">
-=======
         <el-button
           type="primary"
           icon="plus"
           @click="handleNewData"
           v-if="isCreate"
         >
->>>>>>> update2
           {{ contentConfig.header.button[lan] }}
         </el-button>
         <el-button
@@ -218,10 +203,7 @@ defineExpose({
         <el-button
           size="small"
           icon="Edit"
-<<<<<<< HEAD
-=======
           v-if="isUpdate"
->>>>>>> update2
           @click="handleEditClick(scope.row)"
         />
         <el-popconfirm
@@ -234,16 +216,12 @@ defineExpose({
           @cancel="cancelEvent"
         >
           <template #reference>
-<<<<<<< HEAD
-            <el-button size="small" type="danger" icon="Delete" />
-=======
             <el-button
               size="small"
               type="danger"
               icon="Delete"
               v-if="isDelete"
             />
->>>>>>> update2
           </template>
         </el-popconfirm>
       </template>

@@ -53,41 +53,6 @@ function editCallback(data: any) {
 </script>
 
 <template>
-<<<<<<< HEAD
-  <!-- 1.搜索区域 -->
-  <pageSearch
-    :search-config="searchConfig"
-    @query-click="handleQueryClick"
-    @reset-click="handleResetClick"
-  />
-  <!-- 2.展示区域 -->
-  <pageContent
-    :content-config="contentConfig"
-    @new-data-click="handleNewDataClick"
-    @edit-data-click="handleEditDataClick"
-    ref="contentRef"
-  >
-  </pageContent>
-  <!-- 3.新建和编辑 -->
-  <page-modal
-    ref="modalRef"
-    :modal-config-ref="modalConfigRef"
-    :otherInfo="otherInfo"
-  >
-    <div class="menu-tree">
-      <span class="title">权限</span>
-      <el-tree
-        ref="treeRef"
-        :data="entireMenus"
-        show-checkbox
-        node-key="id"
-        highlight-current
-        :props="{ label: 'name', children: 'children' }"
-        @check="handleMenuCheckChange"
-      />
-    </div>
-  </page-modal>
-=======
   <div class="role">
     <!-- 1.搜索区域 -->
     <pageSearch
@@ -123,7 +88,7 @@ function editCallback(data: any) {
       </div>
     </page-modal>
   </div>
->>>>>>> update2
+  >>>>>>> update2
 </template>
 
 <style scoped lang="less">

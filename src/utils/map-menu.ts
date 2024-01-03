@@ -1,6 +1,5 @@
 import type { RouteRecordRaw } from "vue-router";
 import type { IBreadCrumbs } from "@/types/main/main";
-import menu from "@/router/main/system/menu/menu";
 
 export let firstRoute: RouteRecordRaw | undefined = undefined;
 
@@ -107,13 +106,10 @@ export function mapMenuToIds(menus: any[]) {
   return ids;
 }
 
-<<<<<<< HEAD
-=======
 /**
  * 映射类型到id
  * @param menus
  */
->>>>>>> update2
 export function mapTypeToId(menus: any[]) {
   const expendKeys: string[] = [];
   function _recurseGetId(menuList: any[]) {
@@ -127,8 +123,6 @@ export function mapTypeToId(menus: any[]) {
   _recurseGetId(menus);
   return expendKeys;
 }
-<<<<<<< HEAD
-=======
 
 /**
  * 映射菜单中的权限
@@ -148,4 +142,3 @@ export function mapMenusToPermission(userMenu: any[]) {
   _recurseGetPermission(userMenu);
   return permission;
 }
->>>>>>> update2
