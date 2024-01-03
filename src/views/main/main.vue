@@ -1,13 +1,20 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import MainMenu from "@/components/main-menu";
 import MainHeader from "@/components/main-header";
+import Tabs from "@/components/tabs";
 
 // 处理折叠效果
-const isFold = ref(false);
+const isFold = ref<boolean>(false);
 const handleFoldChange = (flag: boolean) => {
   isFold.value = flag;
 };
+
+// loading
+const loading = ref<boolean>(true);
+onMounted(() => {
+  loading.value = false;
+});
 
 // 响应式布局：待开发
 </script>
@@ -15,17 +22,25 @@ const handleFoldChange = (flag: boolean) => {
 <template>
   <div class="main">
     <el-container class="common-layout">
+      <!--侧边栏-->
       <el-aside :width="isFold ? '60px' : '210px'">
         <div class="bg">
           <MainMenu :is-fold="isFold" />
         </div>
       </el-aside>
       <el-container>
-        <el-header height="48px">
+        <!-- 头部-->
+        <el-header class="header">
           <main-header @fold-change="handleFoldChange" />
+          <tabs> </tabs>
         </el-header>
-        <el-main>
-          <router-view />
+        <!--主要部分-->
+        <el-main v-loading="loading">
+          <router-view v-slot="{ Component }">
+            <transition name="slide-fade">
+              <component :is="Component" />
+            </transition>
+          </router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -41,6 +56,10 @@ const handleFoldChange = (flag: boolean) => {
 .common-layout {
   height: 100%;
 
+  .header {
+    height: 80px;
+    padding: 0;
+  }
   .el-aside {
     overflow-x: hidden;
     overflow-y: auto;
@@ -68,5 +87,18 @@ const handleFoldChange = (flag: boolean) => {
     background-color: var(--day-bg-color2);
     transition: var(--day-night-transition);
   }
+}
+/*
+  进入和离开动画可以使用不同
+  持续时间和速度曲线。
+*/
+.slide-fade-enter-active {
+  transition: all 0.6s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
 </style>

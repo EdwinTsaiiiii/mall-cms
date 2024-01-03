@@ -18,21 +18,23 @@ const { modalRef, handleNewDataClick, handleEditDataClick } = usePageModal();
 </script>
 
 <template>
-  <!-- 1.搜索区域 -->
-  <pageSearch
-    :search-config="searchConfig"
-    @query-click="handleQueryClick"
-    @reset-click="handleResetClick"
-  />
-  <!-- 2.展示区域 -->
-  <pageContent
-    :content-config="contentConfig"
-    @new-data-click="handleNewDataClick"
-    @edit-data-click="handleEditDataClick"
-    ref="contentRef"
-  />
-  <!-- 3.新建和编辑 -->
-  <page-modal ref="modalRef" :modal-config-ref="modalConfig" />
+  <div class="category">
+    <!-- 1.搜索区域 -->
+    <pageSearch
+      :search-config="searchConfig"
+      @query-click="handleQueryClick"
+      @reset-click="handleResetClick"
+    />
+    <!-- 2.展示区域 -->
+    <pageContent
+      :content-config="contentConfig"
+      @new-data-click="handleNewDataClick"
+      @edit-data-click="handleEditDataClick"
+      ref="contentRef"
+    />
+    <!-- 3.新建和编辑 -->
+    <page-modal ref="modalRef" :modal-config-ref="modalConfig" />
+  </div>
 </template>
 
 <style scoped lang="less"></style>

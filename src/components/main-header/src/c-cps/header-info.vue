@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { localCache } from "@/utils/cache";
 import {
   IS_DAY,
@@ -33,7 +33,7 @@ const handleChangeTheme = () => {
   }
 };
 
-// 中英互换：待开发
+// 中英切换
 const mainStore = useMainStore();
 const lan = computed(() => {
   return mainStore.language ? 1 : 0;
@@ -61,6 +61,7 @@ const handleLogoutClick = () => {
 <template>
   <div class="header-info">
     <div class="operation">
+      <!--主题切换-->
       <span class="switch-day-night">
         <el-switch
           v-model="isDay"
@@ -71,33 +72,50 @@ const handleLogoutClick = () => {
           :inactive-icon="Moon"
         />
       </span>
-      <span @click="handleChangeLanguage">
+      <span>
+        <span class="dot"></span>
         <svg
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 24 24"
-          width="1.25em"
-          height="1.25em"
-          data-v-12008bb2=""
-          :color="lan ? 'var(--el-color-primary)' : ''"
+          focusable="false"
+          class=""
+          data-icon="bell"
+          width="1.1em"
+          height="1.1em"
+          fill="currentColor"
+          aria-hidden="true"
+          viewBox="64 64 896 896"
         >
           <path
-            fill="currentColor"
-            d="m18.5 10l4.4 11h-2.155l-1.201-3h-4.09l-1.199 3h-2.154L16.5 10h2zM10 2v2h6v2h-1.968a18.222 18.222 0 0 1-3.62 6.301a14.864 14.864 0 0 0 2.336 1.707l-.751 1.878A17.015 17.015 0 0 1 9 13.725a16.676 16.676 0 0 1-6.201 3.548l-.536-1.929a14.7 14.7 0 0 0 5.327-3.042A18.078 18.078 0 0 1 4.767 8h2.24A16.032 16.032 0 0 0 9 10.877a16.165 16.165 0 0 0 2.91-4.876L2 6V4h6V2h2zm7.5 10.885L16.253 16h2.492L17.5 12.885z"
+            d="M816 768h-24V428c0-141.1-104.3-257.7-240-277.1V112c0-22.1-17.9-40-40-40s-40 17.9-40 40v38.9c-135.7 19.4-240 136-240 277.1v340h-24c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h216c0 61.8 50.2 112 112 112s112-50.2 112-112h216c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM512 888c-26.5 0-48-21.5-48-48h96c0 26.5-21.5 48-48 48zM304 768V428c0-55.6 21.6-107.8 60.9-147.1S456.4 220 512 220c55.6 0 107.8 21.6 147.1 60.9S720 372.4 720 428v340H304z"
           ></path>
         </svg>
       </span>
       <span>
-        <span class="dot"></span>
-        <el-icon><bell /></el-icon>
-      </span>
-      <span>
         <el-icon><ChatDotRound /></el-icon>
       </span>
+      <!--中英切换-->
+      <span @click="handleChangeLanguage">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          role="img"
+          width="1.1em"
+          height="1.1em"
+          viewBox="0 0 512 512"
+          class="iconify iconify--ion"
+          :color="lan ? 'var(--el-color-primary)' : ''"
+        >
+          <path
+            fill="currentColor"
+            d="m478.33 433.6l-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4ZM334.83 362L368 281.65L401.17 362Zm-66.99-19.08a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73c39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36c-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93c.92 1.19 1.83 2.35 2.74 3.51c-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59c22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9Z"
+          ></path>
+        </svg>
+      </span>
     </div>
+    <!--下拉列表-->
     <div class="info">
       <el-dropdown>
         <span class="user-info">
-          <el-avatar :size="30" class="avatar" icon="UserFilled" />
+          <el-avatar :size="28" class="avatar" icon="UserFilled" />
           <span class="name">{{ userInfo.name }}</span>
         </span>
         <template #dropdown>
@@ -118,6 +136,26 @@ const handleLogoutClick = () => {
         </template>
       </el-dropdown>
     </div>
+    <div class="setting">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        role="img"
+        width="1.1em"
+        height="1.1em"
+        viewBox="0 0 512 512"
+        class="iconify iconify--ion"
+      >
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="32"
+          d="M262.29 192.31a64 64 0 1 0 57.4 57.4a64.13 64.13 0 0 0-57.4-57.4ZM416.39 256a154.34 154.34 0 0 1-1.53 20.79l45.21 35.46a10.81 10.81 0 0 1 2.45 13.75l-42.77 74a10.81 10.81 0 0 1-13.14 4.59l-44.9-18.08a16.11 16.11 0 0 0-15.17 1.75A164.48 164.48 0 0 1 325 400.8a15.94 15.94 0 0 0-8.82 12.14l-6.73 47.89a11.08 11.08 0 0 1-10.68 9.17h-85.54a11.11 11.11 0 0 1-10.69-8.87l-6.72-47.82a16.07 16.07 0 0 0-9-12.22a155.3 155.3 0 0 1-21.46-12.57a16 16 0 0 0-15.11-1.71l-44.89 18.07a10.81 10.81 0 0 1-13.14-4.58l-42.77-74a10.8 10.8 0 0 1 2.45-13.75l38.21-30a16.05 16.05 0 0 0 6-14.08c-.36-4.17-.58-8.33-.58-12.5s.21-8.27.58-12.35a16 16 0 0 0-6.07-13.94l-38.19-30A10.81 10.81 0 0 1 49.48 186l42.77-74a10.81 10.81 0 0 1 13.14-4.59l44.9 18.08a16.11 16.11 0 0 0 15.17-1.75A164.48 164.48 0 0 1 187 111.2a15.94 15.94 0 0 0 8.82-12.14l6.73-47.89A11.08 11.08 0 0 1 213.23 42h85.54a11.11 11.11 0 0 1 10.69 8.87l6.72 47.82a16.07 16.07 0 0 0 9 12.22a155.3 155.3 0 0 1 21.46 12.57a16 16 0 0 0 15.11 1.71l44.89-18.07a10.81 10.81 0 0 1 13.14 4.58l42.77 74a10.8 10.8 0 0 1-2.45 13.75l-38.21 30a16.05 16.05 0 0 0-6.05 14.08c.33 4.14.55 8.3.55 12.47Z"
+        ></path>
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -126,10 +164,13 @@ const handleLogoutClick = () => {
   display: flex;
   align-items: center;
 }
-
+.setting {
+  display: inline-flex;
+  margin-left: 20px;
+}
 .operation {
   display: inline-flex;
-  margin-right: 20px;
+  margin-right: 15px;
 
   .switch-day-night {
     margin-right: 10px;

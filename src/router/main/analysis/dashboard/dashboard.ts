@@ -1,5 +1,6 @@
 export default {
   path: "/main/analysis/dashboard",
   name: "dashboard",
-  component: () => import("@/views/main/analysis/dashboard/dashboard.vue")
+  component: () => import("@/views/main/analysis/dashboard/dashboard.vue"),
+  hideTab: false
 };

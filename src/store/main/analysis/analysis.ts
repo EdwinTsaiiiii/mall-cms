@@ -8,6 +8,7 @@ import {
   getGoodsAmountList
 } from "@/service/main/analysis/dashboard";
 
+// 仪表盘的仓库
 const useAnalysisStore = defineStore("analysis", {
   state: (): IAnalysis => ({
     categoryGoodsCount: [],

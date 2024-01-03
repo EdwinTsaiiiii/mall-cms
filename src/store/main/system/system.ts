@@ -7,6 +7,7 @@ import {
   newPageData
 } from "@/service/main/system/system";
 
+// 系统页面的仓库，主要是增删改查，所有业务功能相似（增删改查）的页面共用
 const useSystemStore = defineStore("system", {
   state: (): ISystemState => ({
     totalCount: 0,
@@ -18,6 +19,8 @@ const useSystemStore = defineStore("system", {
       const result = await getPageListData(pageName, queryInfo);
       if (result.code !== 1) ElMessage.error(result.msg);
       const { totalCount, list } = result.data;
+      // 在切换前先把store中数据清空避免干扰
+      this.resetData();
       this.totalCount = totalCount;
       this.list = list;
     },

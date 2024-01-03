@@ -16,16 +16,21 @@ const handleIconMenusClick = () => {
 
 <template>
   <div class="main-header">
+    <!--点击折叠-->
     <div class="menu-icon">
       <el-icon size="24px" @click="handleIconMenusClick">
         <component :is="isFold ? 'Expand' : 'Fold'" />
       </el-icon>
     </div>
     <div class="content">
+      <!--面包屑-->
       <div class="breadcrumb">
         <HeaderCrumb />
       </div>
-      <HeaderInfo />
+      <!--其他信息-->
+      <div class="headerInfo">
+        <HeaderInfo />
+      </div>
     </div>
   </div>
 </template>
@@ -40,8 +45,10 @@ const handleIconMenusClick = () => {
   display: flex;
   align-items: center;
   flex: 1;
-  height: 100%;
   color: var(--day-font-color);
+  height: 48px;
+  border-bottom: var(--jjext-color-gray-2) 1px solid;
+  padding: 0 15px;
 
   .menu-icon {
     display: flex;

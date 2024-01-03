@@ -6,12 +6,35 @@ import SelfTable, { ITable } from "@/base-ui/table";
 import { utcFormat } from "@/utils/format";
 import useMainStore from "@/store/main/main";
 import { mapTypeToId } from "@/utils/map-menu";
+import { usePermission } from "@/utils/usePermission";
 
 const emit = defineEmits(["newDataClick", "editDataClick"]);
 
 const props = defineProps<{
   contentConfig: ITable;
 }>();
+
+// 获取操作权限
+const isCreate = usePermission(
+  props.contentConfig.pageName,
+  "create",
+  props.contentConfig.permissionName as string
+);
+const isUpdate = usePermission(
+  props.contentConfig.pageName,
+  "update",
+  props.contentConfig.permissionName as string
+);
+const isDelete = usePermission(
+  props.contentConfig.pageName,
+  "delete",
+  props.contentConfig.permissionName as string
+);
+const isQuery = usePermission(
+  props.contentConfig.pageName,
+  "query",
+  props.contentConfig.permissionName as string
+);
 
 // 分页的数据
 const pageInfo = reactive({ currentPage: 1, pageSize: 10 });
@@ -31,17 +54,18 @@ const expandKeys = ref<any>([]);
 const isExpand = ref<boolean>(false);
 
 // 请求数据
-const fetchListData = async (queryInfo: any = {}) => {
+const fetchListData = (queryInfo: any = {}) => {
+  // 如果没有权限直接返回
+  if (!isQuery) return;
   // 获取offset和size
   const size = pageInfo.pageSize;
   const offset = (pageInfo.currentPage - 1) * size;
   // 发送网络请求
-  await systemStore.getDataListAction(props.contentConfig.pageName, {
+  systemStore.getDataListAction(props.contentConfig.pageName, {
     size,
     offset,
     ...queryInfo
   });
-
   // 可以展开的row
   // if (props.contentConfig.pageName === "menu") {
   //   expandKeys.value = mapTypeToId(systemStore.list);
@@ -133,7 +157,12 @@ defineExpose({
     >
       <!--Header中的插槽-->
       <template #headerHandler>
-        <el-button type="primary" icon="plus" @click="handleNewData">
+        <el-button
+          type="primary"
+          icon="plus"
+          @click="handleNewData"
+          v-if="isCreate"
+        >
           {{ contentConfig.header.button[lan] }}
         </el-button>
         <el-button
@@ -174,6 +203,7 @@ defineExpose({
         <el-button
           size="small"
           icon="Edit"
+          v-if="isUpdate"
           @click="handleEditClick(scope.row)"
         />
         <el-popconfirm
@@ -186,7 +216,12 @@ defineExpose({
           @cancel="cancelEvent"
         >
           <template #reference>
-            <el-button size="small" type="danger" icon="Delete" />
+            <el-button
+              size="small"
+              type="danger"
+              icon="Delete"
+              v-if="isDelete"
+            />
           </template>
         </el-popconfirm>
       </template>

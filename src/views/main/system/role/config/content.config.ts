@@ -2,6 +2,7 @@ import type { ITable } from "@/base-ui/table";
 
 const contentConfig: ITable = {
   pageName: "role",
+  permissionName: "system",
   header: {
     title: ["角色列表", "users list"],
     button: ["新建角色", "create user"]

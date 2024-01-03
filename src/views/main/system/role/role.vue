@@ -8,7 +8,7 @@ import contentConfig from "./config/content.config";
 import modalConfig from "./config/modal.config";
 
 import type { ElTree } from "element-plus";
-import { computed, ref, nextTick } from "vue";
+import { computed, ref, nextTick, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 
 import usePageContent from "@/hooks/usePageContent";
@@ -53,39 +53,41 @@ function editCallback(data: any) {
 </script>
 
 <template>
-  <!-- 1.搜索区域 -->
-  <pageSearch
-    :search-config="searchConfig"
-    @query-click="handleQueryClick"
-    @reset-click="handleResetClick"
-  />
-  <!-- 2.展示区域 -->
-  <pageContent
-    :content-config="contentConfig"
-    @new-data-click="handleNewDataClick"
-    @edit-data-click="handleEditDataClick"
-    ref="contentRef"
-  >
-  </pageContent>
-  <!-- 3.新建和编辑 -->
-  <page-modal
-    ref="modalRef"
-    :modal-config-ref="modalConfigRef"
-    :otherInfo="otherInfo"
-  >
-    <div class="menu-tree">
-      <span class="title">权限</span>
-      <el-tree
-        ref="treeRef"
-        :data="entireMenus"
-        show-checkbox
-        node-key="id"
-        highlight-current
-        :props="{ label: 'name', children: 'children' }"
-        @check="handleMenuCheckChange"
-      />
-    </div>
-  </page-modal>
+  <div class="role">
+    <!-- 1.搜索区域 -->
+    <pageSearch
+      :search-config="searchConfig"
+      @query-click="handleQueryClick"
+      @reset-click="handleResetClick"
+    />
+    <!-- 2.展示区域 -->
+    <pageContent
+      :content-config="contentConfig"
+      @new-data-click="handleNewDataClick"
+      @edit-data-click="handleEditDataClick"
+      ref="contentRef"
+    >
+    </pageContent>
+    <!-- 3.新建和编辑 -->
+    <page-modal
+      ref="modalRef"
+      :modal-config-ref="modalConfigRef"
+      :otherInfo="otherInfo"
+    >
+      <div class="menu-tree">
+        <span class="title">权限</span>
+        <el-tree
+          ref="treeRef"
+          :data="entireMenus"
+          show-checkbox
+          node-key="id"
+          highlight-current
+          :props="{ label: 'name', children: 'children' }"
+          @check="handleMenuCheckChange"
+        />
+      </div>
+    </page-modal>
+  </div>
 </template>
 
 <style scoped lang="less">
