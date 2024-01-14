@@ -41,8 +41,8 @@ export function addRoutesWithMenu(menus: any) {
 
 // 前置导航守卫
 router.beforeEach((to) => {
-  const token = localCache.getCache(LOGIN_TOKEN);
   NProgress.start();
+  const token = localCache.getCache(LOGIN_TOKEN);
 
   if (to.path.startsWith("/main") && !token) {
     return "/login";

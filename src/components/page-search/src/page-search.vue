@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
-import type { ElForm } from "element-plus";
 import SelfForm from "@/base-ui/form";
 import type { IForm } from "@/base-ui/form";
 import useMainStore from "@/store/main/main";
@@ -69,6 +68,6 @@ const handleQueryClick = () => {
 
 .btns {
   text-align: right;
-  padding: 0 50px 10px 0;
+  padding: 0 0 10px 0;
 }
 </style>

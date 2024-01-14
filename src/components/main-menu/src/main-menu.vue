@@ -35,7 +35,6 @@ function handleItemClick(item: any) {
   systemStore.resetData();
   router.push(item.url);
 
-  console.log(route);
   multipleTabStore.addTab({ id: item.id, name: item.name, url: item.url });
 }
 </script>

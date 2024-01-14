@@ -88,7 +88,6 @@ function editCallback(data: any) {
       </div>
     </page-modal>
   </div>
-  >>>>>>> update2
 </template>
 
 <style scoped lang="less">

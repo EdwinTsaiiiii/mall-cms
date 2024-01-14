@@ -51,7 +51,7 @@ function throttle(fn, delay) {
   return function () {
     if (timer) return;
     timer = setTimeout(() => {
-      fn();
+      window.requestAnimationFrame(fn);
       timer = null;
     }, delay);
   };
@@ -70,11 +70,11 @@ function scrollHandler() {
     // 计算被滚没了的高度
     const offsetH = data.startIdx * data.itemH;
     // 猛拉滚动条导致高度溢出并且数据无法渲染（这个暂时不知道怎么处理）
+    // 还有对白屏的处理
     if (addCount > props.dataList.length) {
       alert("请勿过快拉动滚动条！");
       location.reload();
     }
-    console.log(curScrollTop, addCount, data.startIdx, listH, offsetH);
     // 添加样式，不断调整padding和高度
     ulRef.value.style.setProperty("padding-top", `${addCount * data.itemH}px`);
     ulRef.value.style.setProperty("height", `${listH - offsetH}px`);
@@ -107,8 +107,8 @@ watchEffect(() => {
         "height",
         `${data.itemH * props.dataList.length}px`
       );
-      window.removeEventListener("scroll", throttle(scrollHandler, 100), true);
-      window.addEventListener("scroll", throttle(scrollHandler, 100), true);
+      window.removeEventListener("scroll", throttle(scrollHandler, 30), true);
+      window.addEventListener("scroll", throttle(scrollHandler, 30), true);
     });
   }
 });
@@ -154,5 +154,8 @@ onUnmounted(() => {
 }
 .item-box-item {
   margin: 10px 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

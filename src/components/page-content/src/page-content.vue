@@ -248,10 +248,14 @@ defineExpose({
 :global(.el-table__row):hover {
   background-color: var(--day-main-color-hover);
 }
+:global(.el-checkbox) {
+  margin-right: 0;
+}
 // 解决表格干扰图片预览的问题
 :global(.el-table .el-table__cell) {
   position: unset;
 }
+
 .content {
   margin-top: 20px;
   padding: 20px;

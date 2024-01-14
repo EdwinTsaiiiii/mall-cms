@@ -119,14 +119,20 @@ let dynamic = ref(props.pageName === "menu" ? "field" : "type");
   padding: 0 5px;
   justify-content: space-between;
   align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
 
   .title {
     font-size: 20px;
     font-weight: 700;
+    white-space: nowrap;
+    margin-right: 20px;
   }
 
   .handler {
     align-items: center;
+    display: flex;
   }
 }
 
@@ -140,5 +146,7 @@ let dynamic = ref(props.pageName === "menu" ? "field" : "type");
   display: flex;
   justify-content: flex-end;
   margin-top: 15px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 </style>

@@ -56,7 +56,6 @@ const { modalRef, handleNewDataClick, handleEditDataClick } = usePageModal();
     <!-- 3.新建和编辑 -->
     <page-modal ref="modalRef" :modal-config-ref="modalConfig" />
   </div>
-  >>>>>>> update2
 </template>
 
 <style scoped lang="less"></style>

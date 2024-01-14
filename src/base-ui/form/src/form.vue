@@ -29,6 +29,13 @@ const handleResetFields = () => {
 defineExpose({
   handleResetFields
 });
+
+let labelWidth = ref<string>("120px");
+window.addEventListener("resize", () => {
+  if (window.visualViewport.width < 1200) labelWidth.value = "100px";
+  if (window.visualViewport.width < 600) labelWidth.value = "80px";
+  else labelWidth.value = "120px";
+});
 </script>
 
 <template>
@@ -36,12 +43,12 @@ defineExpose({
   <el-form
     :model="formData"
     ref="formRef"
-    :label-width="style.labelWidth"
+    :label-width="labelWidth"
     size="large"
   >
-    <el-row :gutter="style.colLayout.gutter">
+    <el-row class="el-row">
       <template v-for="item in formItems" :key="item.prop">
-        <el-col :span="style.colLayout.span">
+        <el-col class="el-col">
           <el-form-item :label="item.label[lan]" :prop="item.prop">
             <!--输入类型-->
             <template v-if="item.field === 'input'">
@@ -96,7 +103,21 @@ defineExpose({
 }
 
 .el-form-item {
-  padding: 20px 40px;
+  padding: 20px 0;
   margin-bottom: 0;
+}
+
+@media (min-width: 1200px) and (max-width: 1920px) {
+  .el-col-24 {
+    max-width: 33.3%;
+    flex: 0 0 33.3%;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1200px) {
+  .el-col-24 {
+    max-width: 50%;
+    flex: 0 0 50%;
+  }
 }
 </style>

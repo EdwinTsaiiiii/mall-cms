@@ -166,11 +166,11 @@ const handleLogoutClick = () => {
 }
 .setting {
   display: inline-flex;
-  margin-left: 20px;
+  margin-left: 15px;
 }
 .operation {
   display: inline-flex;
-  margin-right: 15px;
+  margin-right: 10px;
 
   .switch-day-night {
     margin-right: 10px;
@@ -216,6 +216,11 @@ const handleLogoutClick = () => {
   .name {
     margin-left: 8px;
     color: var(--day-font-color);
+  }
+  @media (max-width: 500px) {
+    .name {
+      display: none;
+    }
   }
 }
 
