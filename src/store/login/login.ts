@@ -27,6 +27,7 @@ const useLoginStore = defineStore("login", {
     async loginAccountAction(account: IAccount) {
       // 1.账号登录, 获取token等信息
       const loginResult = await accountLoginRequest(account);
+      console.log(loginResult);
       // 如果账号密码填写错误
       if (loginResult.code !== 1) {
         ElMessage.error("账号或密码错误");
@@ -59,7 +60,7 @@ const useLoginStore = defineStore("login", {
       ElMessage.success("登录成功");
     },
 
-    // 加载所有数据
+    // 加载所有数据（有token的情况）
     loadLocalDataAction() {
       this.token = localCache.getCache(LOGIN_TOKEN);
       this.userInfo = localCache.getCache(USER_INFO);

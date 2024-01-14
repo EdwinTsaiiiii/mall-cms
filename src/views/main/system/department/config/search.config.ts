@@ -4,13 +4,8 @@ const searchConfig: IForm = {
   pageName: "department",
   header: [],
   style: {
-    labelWidth: "120px",
     itemStyle: {
       padding: "5px 20px"
-    },
-    colLayout: {
-      gutter: 24,
-      span: 8
     }
   },
   handle: {

@@ -28,11 +28,6 @@ const useSystemStore = defineStore("system", {
     // 创建
     async newPageDataAction(pageName: string, userInfo: any) {
       const result = await newPageData(pageName, userInfo);
-      if (result.code === 1) {
-        ElMessage.success("创建成功");
-      } else {
-        ElMessage.error(result.msg);
-      }
       // 请求新的数据
       this.getDataListAction(pageName, { offset: 0, size: 10 });
     },
@@ -40,22 +35,12 @@ const useSystemStore = defineStore("system", {
     // 删除
     async deletePageDataAction(pageName: string, id: number) {
       const result = await deletePageData(pageName, id);
-      if (result.code === 1) {
-        ElMessage.success("删除成功");
-      } else {
-        ElMessage.error(result.msg);
-      }
       this.getDataListAction(pageName, { offset: 0, size: 10 });
     },
 
     // 编辑
     async editPageDataAction(pageName: string, id: number, userInfo: any) {
       const result = await editPageData(pageName, id, userInfo);
-      if (result.code === 1) {
-        ElMessage.success("修改成功");
-      } else {
-        ElMessage.error(result.msg);
-      }
       this.getDataListAction(pageName, { offset: 0, size: 10 });
     },
 

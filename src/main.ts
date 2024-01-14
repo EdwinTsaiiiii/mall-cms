@@ -9,6 +9,7 @@ import registerStore from "@/store";
 import ElementPlus from "element-plus";
 // @ts-ignore
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
+
 import "default-passive-events";
 
 import "nprogress/nprogress.css";
